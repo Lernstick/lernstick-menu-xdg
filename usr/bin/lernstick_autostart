@@ -1,0 +1,171 @@
+#!/bin/sh
+
+# gettext support
+. gettext.sh
+export TEXTDOMAIN=lernstick_autostart
+
+# We can't configure the keyboard for GNOME or Cinnamon via live-config because
+# gsettings needs a running dbus session.
+# This really sucks and therefore we have to configure the users
+# GNOME and Cinnamon keyboard settings here...
+if [ -e /usr/bin/gsettings ]
+then
+	# Reading kernel command line
+	for _PARAMETER in $(cat /proc/cmdline)
+	do
+		case "${_PARAMETER}" in
+			live-config.keyboard-layouts=*|keyboard-layouts=*)
+				LIVE_KEYBOARD_LAYOUTS="${_PARAMETER#*keyboard-layouts=}"
+				;;
+
+			live-config.username=*|username=*)
+				LIVE_USERNAME="${_PARAMETER#*username=}"
+				;;
+		esac
+	done
+	GNOME_INPUT_SOURCES=""
+	GNOME_KEYBOARD_LAYOUTS=""
+	IFS=" "
+	for i in $(echo "$LIVE_KEYBOARD_LAYOUTS" | sed "s/,/ /g")
+	do
+	        # GNOME has its own standard of keyboard layout definitions.
+		# Cinnamon (based on GNOME!) uses
+		# - a different gsettings key
+		# - even another standard for keyboard layout definitions
+	        # Here are some known mappings:
+	        if [ "$i" = "ch(fr)" ]
+	        then
+	                GNOME_INPUT_SOURCE="ch+fr"
+			GNOME_KEYBOARD_LAYOUT="ch\tfr"
+		else
+			GNOME_INPUT_SOURCE="$i"
+			GNOME_KEYBOARD_LAYOUT="$i"
+	        fi
+
+	        if [ -n "${GNOME_INPUT_SOURCES}" ]
+	        then
+	                GNOME_INPUT_SOURCES="${GNOME_INPUT_SOURCES}, "
+	        fi
+	        GNOME_INPUT_SOURCES="${GNOME_INPUT_SOURCES}('xkb', '${GNOME_INPUT_SOURCE}')"
+
+	        if [ -n "${GNOME_KEYBOARD_LAYOUTS}" ]
+	        then
+	                GNOME_KEYBOARD_LAYOUTS="${GNOME_KEYBOARD_LAYOUTS}, "
+	        fi
+	        GNOME_KEYBOARD_LAYOUTS="${GNOME_KEYBOARD_LAYOUTS}'${GNOME_KEYBOARD_LAYOUT}'"
+	done
+
+	# configure GNOME
+	gsettings set org.gnome.desktop.input-sources sources "[${GNOME_INPUT_SOURCES}]"
+
+	# configure Cinnamon
+	# unfortunately, we are too late here for full configuration, Cinnamon already determined its default
+	# keyboard layout from the old list. We can still update the list but the default only changes
+	# after the next login...
+	gsettings set org.gnome.libgnomekbd.keyboard layouts "[${GNOME_KEYBOARD_LAYOUTS}]"
+
+	# configure MATE
+	# unfortunately, we are too late here for full configuration, MATE already determined its default
+	# keyboard layout from the old list. We can still update the list but the default only changes
+	# after the next login...
+	gsettings set org.mate.peripherals-keyboard-xkb.kbd layouts "[${GNOME_KEYBOARD_LAYOUTS}]"
+fi
+
+show_dialog ()
+{
+	TEXT="$1"
+
+	if [ "$KDE_FULL_SESSION" ]
+	then
+		kdialog --msgbox "${TEXT}"
+	else
+		# zenity's HTML interpreter is so dumb, it doesn't even understand <br>...
+		# we need to replace it with "\\n"
+		ZENITY_TEXT="$(echo ${TEXT} | sed 's/<br>/\\n/g')"
+		echo "ZENITY_TEXT=\"${ZENITY_TEXT}\""
+		zenity --info --text "${ZENITY_TEXT}"
+	fi
+}
+
+CONFIG_FILE="/etc/lernstickWelcome"
+
+# start installer or welcome program
+COW=$(grep /lib/live/mount/persistence /proc/mounts | grep -v ^tmpfs | grep -v ^aufs)
+echo "COW: \"${COW}\""
+
+if echo "${COW}" | grep -q "rw,"
+then
+	echo "data partition is in read-write mode -> try starting lernstickWelcome..."
+	if [ -e ${CONFIG_FILE} ]
+	then
+		if grep -q "ShowWelcome=true" ${CONFIG_FILE}
+		then
+			echo "user selected lernstickWelcome startup"
+			START="true"
+		elif grep -q "ShowWelcome=false" ${CONFIG_FILE}
+		then
+			echo "user disabled lernstickWelcome start in config file"
+		else
+			echo "no ShowWelcome key in lernstickWelcome config file -> default start"
+			START="true"
+		fi
+	else
+		echo "no lernstickWelcome config file -> default start"
+		START="true"
+	fi
+
+	DESKTOP_FILE="/usr/share/applications/ch-fhnw-lernstickwelcome-welcome.desktop"
+	if [ -n "${START}" ] && [ -e ${DESKTOP_FILE} ]
+	then
+		kioclient exec ${DESKTOP_FILE}
+	fi
+
+elif echo "${COW}" | grep -q "ro,"
+then
+	echo "data partition is in read-only mode -> try showing information dialog..."
+	if [ -e ${CONFIG_FILE} ]
+	then
+		if grep -q "ShowReadOnlyInfo=true" ${CONFIG_FILE}
+		then
+			echo "user selected information dialog startup"
+			START="true"
+		fi
+	else
+		echo "no lernstickWelcome config file -> default start"
+		START="true"
+	fi
+
+	if [ -n "${START}" ]
+	then
+		TEXT="$(gettext "The data partition is in <b>read-only mode</b>.<br><br>This means that all modifications you might have done previously<br>are visible but all modifications you will do now are <b>lost</b><br>when you shut down or restart the system.<br><br>(If you now change files and want to keep them, you need to<br>save them on the exchange partition or other <b>external media</b>.)")"
+		show_dialog "${TEXT}"
+	fi
+
+else
+	# data partition is not used, we can NOT install additional programs
+	# but we can copy the system
+	echo "data partition is NOT used"
+	if [ -e ${CONFIG_FILE} ]
+	then
+		if grep -q "ShowNotUsedInfo=true" ${CONFIG_FILE}
+		then
+			# show information dialog before starting copy program
+			TEXT="$(gettext "There is <b>no data partition in use</b>.<br><br>This means that all modifications you might have done previously<br>are now <b>invisible</b> and all modifications you will do now are <b>lost</b><br>when you shut down or restart the system.<br><br>(If you now change files and want to keep them, you need to<br>save them on the exchange partition or other <b>external media</b>.)")"
+			show_dialog "${TEXT}"
+		else
+			echo "info dialog not configured in config file"
+		fi
+
+		if grep -q "AutoStartInstaller=true" ${CONFIG_FILE}
+		then
+			echo "persistency disabled -> try starting dlcopy..."
+			# xdg-open unfortunately does not work on gnome...
+			#xdg-open /usr/share/applications/dlcopy.desktop
+			kioclient exec /usr/share/applications/ch-fhnw-dlcopy-dlcopy.desktop
+		else
+			echo "installer autostart not configured in config file"
+		fi
+	else
+		echo "no lernstickWelcome config file -> no dialog and autostart"
+	fi
+fi
