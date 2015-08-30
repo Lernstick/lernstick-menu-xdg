@@ -1,0 +1,11 @@
+[Unit]
+Description=Final run of lernstick-backup
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/bin/true
+ExecStop=/usr/bin/lernstick_backup once
+
+[Install]
+WantedBy=multi-user.target

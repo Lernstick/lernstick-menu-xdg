@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Encoding=UTF-8
-Version=1.0
-Name=Lernstick backup
-Name[de_DE]=Lernstick-Backup
-Exec=sudo lernstick_backup
-X-GNOME-Autostart-enabled=true

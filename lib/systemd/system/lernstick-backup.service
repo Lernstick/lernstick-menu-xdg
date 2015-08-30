@@ -1,0 +1,8 @@
+[Unit]
+Description=Background backup
+
+[Service]
+ExecStart=/usr/bin/lernstick_backup
+
+[Install]
+WantedBy=multi-user.target

@@ -5,6 +5,7 @@
 export TEXTDOMAIN=lernstick_backup
 
 SCREENSHOT_DIRECTORY="/home/user/Screenshots"
+LOG_FILE="/var/log/lernstick_backup"
 
 # source config file
 CONFIG_FILE="/etc/lernstickWelcome"
@@ -12,13 +13,13 @@ if [ -f ${CONFIG_FILE} ]
 then
 	. ${CONFIG_FILE}
 else
-	# config file does not (yet) exist
+	echo "${CONFIG_FILE} does not (yet) exist" >> ${LOG_FILE}
 	exit 0
 fi
 
 if [ "${Backup}" != "true" ]
 then
-	# continuous backup is not enabled
+	echo "continuous backup is not enabled" >> ${LOG_FILE}
 	exit 0
 fi
 
@@ -31,9 +32,9 @@ do_rdiff()
 		mkdir -p "${DESTINATION}"
 	fi
 
-	rdiff-backup -v3 "${1}" "${DESTINATION}"
+	rdiff-backup -v5 "${1}" "${DESTINATION}" >> ${LOG_FILE} 2>&1
 	RETURN_VALUE=$?
-	echo "RETURN_VALUE=\"${RETURN_VALUE}\""
+	echo "RETURN_VALUE=\"${RETURN_VALUE}\"" >> ${LOG_FILE}
 	if [ ${RETURN_VALUE} -eq 0 ]
 	then
 		delete_old_backups "${DESTINATION}"
@@ -56,19 +57,19 @@ delete_old_backups()
 	# There are at least 5 files per backup timestamp, so limiting the number
 	# of backups to 500 seems to be a good default.
 	MAX_COUNTER=500
-	echo "trying to keep only ${MAX_COUNTER} backups..."
+	echo "trying to keep only ${MAX_COUNTER} backups..." >> ${LOG_FILE}
 	COUNTER=$(rdiff-backup -l --parsable-output "$1" | wc -l)
-	echo "There are ${COUNTER} backups"
+	echo "There are ${COUNTER} backups" >> ${LOG_FILE}
 	OVERHEAD=$((${COUNTER}-${MAX_COUNTER}))
-	echo "overhead: ${OVERHEAD}"
+	echo "overhead: ${OVERHEAD}" >> ${LOG_FILE}
 	if [ ${OVERHEAD} -gt 0 ]
 	then
-		echo "we should delete old backups"
+		echo "we should delete old backups" >> ${LOG_FILE}
 		TIMESTAMP=$(rdiff-backup -l --parsable-output $1 | sed -n $((${OVERHEAD}+1))p | awk '{ print $1 }')
-		echo "last timestamp to keep: ${TIMESTAMP}"
+		echo "last timestamp to keep: ${TIMESTAMP}" >> ${LOG_FILE}
 		rdiff-backup --force --remove-older-than ${TIMESTAMP} "$1"
 	else
-		echo "we don't need to delete old backups"
+		echo "we don't need to delete old backups" >> ${LOG_FILE}
 	fi
 }
 
@@ -97,7 +98,7 @@ do_backup()
 		if [ ${BACKUP_DEVICE} ]
 		then
 			MOUNT_POINT="$(grep ${BACKUP_DEVICE} /proc/mounts | awk '{ print $2 }')"
-			echo "mount point of ${BACKUP_DEVICE}: \"${MOUNT_POINT}\""
+			echo "mount point of ${BACKUP_DEVICE}: \"${MOUNT_POINT}\"" >> ${LOG_FILE}
 			if [ -z "${MOUNT_POINT}" ]
 			then
 				MOUNT_DIR="/mnt/backup/"
@@ -105,7 +106,7 @@ do_backup()
 				mkdir -p "${MOUNT_POINT}"
 				chown root.root "${MOUNT_DIR}"
 				chmod 700  "${MOUNT_DIR}"
-				echo "calling \"mount ${BACKUP_DEVICE} ${MOUNT_POINT}\""
+				echo "calling \"mount ${BACKUP_DEVICE} ${MOUNT_POINT}\"" >> ${LOG_FILE}
 				mount ${BACKUP_DEVICE} "${MOUNT_POINT}"
 			fi
 			do_rdiff "${BackupSource}" "${MOUNT_POINT}/lernstick_backup"
@@ -116,29 +117,38 @@ do_backup()
 }
 
 
+SIZE=$(wc -c < ${LOG_FILE})
+if [ "${SIZE}" != "0" ]
+then
+	echo "" >> ${LOG_FILE}
+fi
+
 if [ "$1" = "once" ]
 then
+	echo "FINAL backup run at $(date -R)" >> ${LOG_FILE}
 	do_backup
 else
 	TIMEOUT=$(expr ${BackupFrequency} \* 60)
 	while true; do
+		echo "backup run at $(date -R)" >> ${LOG_FILE}
+
 		# get current time
 		BEFORE="$(date +%s)"
-		echo "BEFORE: ${BEFORE}"
+		echo "system time in seconds before running backup: ${BEFORE}" >> ${LOG_FILE}
 
 		# execute command
 		do_backup
 
 		# wait until TIMEOUT is over
 		AFTER="$(date +%s)"
-		echo "AFTER: ${AFTER}"
+		echo "system time in seconds after running backup: ${AFTER}" >> ${LOG_FILE}
 		SLEEP=$(expr ${TIMEOUT} - ${AFTER} + ${BEFORE})
 		if [ ${SLEEP} -gt 0 ]
 		then
-			echo "sleeping for ${SLEEP} seconds..."
+			echo "sleeping for ${SLEEP} seconds..." >> ${LOG_FILE}
 			sleep ${SLEEP}
 		else
-			echo "timeout already passed!"
+			echo "timeout already passed!" >> ${LOG_FILE}
 		fi
 	done
 fi
