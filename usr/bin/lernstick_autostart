@@ -114,6 +114,9 @@ then
 		START="true"
 	fi
 
+	# show info about default passwort in exam environment
+        kdialog --msgbox "$(gettext "A password is needed for all administrative actions.<br>The default password is empty (just press <tt>ENTER</tt>).<br>To secure the exam environment you must change<br>the password in the welcome application.")" --dontagain empty_passwd_info:show
+
 	DESKTOP_FILE="/usr/share/applications/ch-fhnw-lernstickwelcome-welcome.desktop"
 	if [ -n "${START}" ] && [ -e ${DESKTOP_FILE} ]
 	then

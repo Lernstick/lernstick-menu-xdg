@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-11 10:29+0200\n"
+"POT-Creation-Date: 2013-10-18 13:15+0200\n"
 "PO-Revision-Date: 2013-04-24 13:41+0200\n"
 "Last-Translator: Ronny Standtke <ronny.standtke@gmx.net>\n"
 "Language-Team: DE <DE@li.org>\n"
@@ -16,7 +16,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: usr/bin/lernstick_autostart:72
+#: usr/bin/lernstick_autostart:51
+msgid ""
+"A password is needed for all administrative actions.<br>The default password "
+"is empty (just press <tt>ENTER</tt>).<br>To secure the exam environment you "
+"must change<br>the password in the welcome application."
+msgstr ""
+"Für alle administrativen Vorgänge wird ein Passwort benötigt.<br>Das "
+"Standard-Passwort ist leer (einfach <tt>ENTER</tt> drücken).<br>Um die "
+"Prüfungsumgebung abzusichern, müssen Sie das<br>Passwort in der Willkommens-"
+"Anwendung ändern."
+
+#: usr/bin/lernstick_autostart:78
 msgid ""
 "The data partition is in <b>read-only mode</b>.<br><br>This means that all "
 "modifications you might have done previously<br>are visible but all "
@@ -33,7 +44,7 @@ msgstr ""
 "die Dateien auf der Austauschpartition oder einem anderen<br><b>externen "
 "Speichermedium</b> abspeichern.)"
 
-#: usr/bin/lernstick_autostart:81
+#: usr/bin/lernstick_autostart:87
 msgid ""
 "There is <b>no data partition in use</b>.<br><br>This means that all "
 "modifications you might have done previously<br>are now <b>invisible</b> and "
