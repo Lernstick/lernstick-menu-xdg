@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # gettext support
 . gettext.sh
@@ -73,7 +73,7 @@ fi
 
 show_dialog ()
 {
-	TEXT="$1"
+	TEXT="${1}"
 
 	if [ "$KDE_FULL_SESSION" ]
 	then
@@ -84,6 +84,25 @@ show_dialog ()
 		ZENITY_TEXT="$(echo ${TEXT} | sed 's/<br>/\\n/g')"
 		echo "ZENITY_TEXT=\"${ZENITY_TEXT}\""
 		zenity --info --text "${ZENITY_TEXT}"
+	fi
+}
+
+run_desktop_file()
+{
+	DESKTOP_FILE="${1}"
+
+	if [ -e "${DESKTOP_FILE}" ]
+	then
+		if [ "$KDE_FULL_SESSION" ]
+		then
+			kioclient exec "${DESKTOP_FILE}"
+		else
+			BASE_NAME="$(basename ${DESKTOP_FILE})"
+			SHORT_NAME="${BASE_NAME%.desktop}"
+			gtk-launch "${SHORT_NAME}"
+		fi
+	else
+		echo "desktop file ${DESKTOP_FILE} does not exist!"
 	fi
 }
 
@@ -117,10 +136,9 @@ then
 	# show info about default passwort in exam environment
         kdialog --msgbox "$(gettext "A password is needed for all administrative actions.<br>The default password is empty (just press <tt>ENTER</tt>).<br>To secure the exam environment you must change<br>the password in the welcome application.")" --dontagain empty_passwd_info:show
 
-	DESKTOP_FILE="/usr/share/applications/ch-fhnw-lernstickwelcome-welcome.desktop"
-	if [ -n "${START}" ] && [ -e ${DESKTOP_FILE} ]
+	if [ -n "${START}" ]
 	then
-		kioclient exec ${DESKTOP_FILE}
+		run_desktop_file "/usr/share/applications/ch-fhnw-lernstickwelcome-welcome.desktop"
 	fi
 
 elif echo "${COW}" | grep -q "ro,"
@@ -162,9 +180,7 @@ else
 		if grep -q "AutoStartInstaller=true" ${CONFIG_FILE}
 		then
 			echo "persistency disabled -> try starting dlcopy..."
-			# xdg-open unfortunately does not work on gnome...
-			#xdg-open /usr/share/applications/dlcopy.desktop
-			kioclient exec /usr/share/applications/ch-fhnw-dlcopy-dlcopy.desktop
+			run_desktop_file "/usr/share/applications/ch-fhnw-dlcopy-dlcopy.desktop"
 		else
 			echo "installer autostart not configured in config file"
 		fi
