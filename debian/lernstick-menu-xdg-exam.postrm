@@ -1,5 +1,5 @@
 #!/bin/sh
-# postrm script for lernstick-menu-xdg
+# postrm script for lernstick-menu-xdg-exam
 #
 # see: dh_installdeb(1)
 
@@ -27,27 +27,27 @@ case "$1" in
 		dpkg-maintscript-helper rm_conffile /etc/xdg/menus/applications-merged/lernstick.merge.menu -- "$@"
 	fi
 
-        dpkg-divert --package lernstick-menu-xdg --rename --remove \
+        dpkg-divert --package lernstick-menu-xdg-exam --rename --remove \
 		/etc/xdg/menus/debian-menu.menu
-        dpkg-divert --package lernstick-menu-xdg --rename --remove \
+        dpkg-divert --package lernstick-menu-xdg-exam --rename --remove \
 		/etc/xdg/menus/xfce-applications.menu
-        dpkg-divert --package lernstick-menu-xdg --rename --remove \
+        dpkg-divert --package lernstick-menu-xdg-exam --rename --remove \
 		/usr/share/desktop-directories/kde-edu-languages.directory
-        dpkg-divert --package lernstick-menu-xdg --rename --remove \
+        dpkg-divert --package lernstick-menu-xdg-exam --rename --remove \
 		/usr/share/desktop-directories/kde-edu-mathematics.directory
-        dpkg-divert --package lernstick-menu-xdg --rename --remove \
+        dpkg-divert --package lernstick-menu-xdg-exam --rename --remove \
 		/usr/share/desktop-directories/kde-edu-miscellaneous.directory
-        dpkg-divert --package lernstick-menu-xdg --rename --remove \
+        dpkg-divert --package lernstick-menu-xdg-exam --rename --remove \
 		/usr/share/desktop-directories/kde-games-arcade.directory
-        dpkg-divert --package lernstick-menu-xdg --rename --remove \
+        dpkg-divert --package lernstick-menu-xdg-exam --rename --remove \
 		/usr/share/desktop-directories/kde-games-card.directory
-        dpkg-divert --package lernstick-menu-xdg --rename --remove \
+        dpkg-divert --package lernstick-menu-xdg-exam --rename --remove \
 		/usr/share/desktop-directories/kde-games-board.directory
-        dpkg-divert --package lernstick-menu-xdg --rename --remove \
+        dpkg-divert --package lernstick-menu-xdg-exam --rename --remove \
 		/usr/share/desktop-directories/kde-games-kids.directory
-        dpkg-divert --package lernstick-menu-xdg --rename --remove \
+        dpkg-divert --package lernstick-menu-xdg-exam --rename --remove \
 		/usr/share/desktop-directories/kde-games-logic.directory
-        dpkg-divert --package lernstick-menu-xdg --rename --remove \
+        dpkg-divert --package lernstick-menu-xdg-exam --rename --remove \
 		/usr/share/desktop-directories/kde-games-strategy.directory
     ;;
 
