@@ -1,3 +1,12 @@
+lernstick-menu-xdg-exam (5) lernstick-8; urgency=medium
+
+  * [1d8e21] updated gettext info
+  * [e92c4f] updated translation
+  * [d989b1] updated error dialog handling
+  * [c75d88] re-added backup autostart file
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Mon, 31 Aug 2015 16:35:11 +0200
+
 lernstick-menu-xdg-exam (4) lernstick-8; urgency=medium
 
   * [17f22f] use systemd for backup scripts
