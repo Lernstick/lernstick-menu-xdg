@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-19 14:12+0100\n"
+"POT-Creation-Date: 2015-08-31 16:26+0200\n"
 "PO-Revision-Date: 2013-04-24 13:41+0200\n"
 "Last-Translator: Ronny Standtke <ronny.standtke@gmx.net>\n"
 "Language-Team: DE <DE@li.org>\n"
@@ -16,17 +16,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: usr/bin/lernstick_backup:37
+#: usr/bin/lernstick_backup:62
 #, sh-format
-msgid "<div align=left>Backup to<br><tt>${DESTINATION}</tt><br>failed!</div>"
+msgid "Backup to<br><tt>${DESTINATION}</tt><br>failed!"
 msgstr ""
-"<div align=left>Datensicherung nach<br><tt>${DESTINATION}</tt><br>fehlgeschlagen!</div>"
+"Datensicherung nach<br><tt>${DESTINATION}</tt><br>fehlgeschlagen!"
 
-#: usr/bin/lernstick_backup:79
+#: usr/bin/lernstick_backup:132
 #, sh-format
-msgid ""
-"<div align=left>Backup partition<br><tt>${BackupPartition}</tt><br>not found!"
-"</div>"
+msgid "Backup partition<br><tt>${BackupPartition}</tt><br>not found!"
 msgstr ""
-"<div align=left>Datensicherungspartition<br><tt>${BackupPartition}</"
-"tt><br>nicht gefunden!</div>"
+"Datensicherungspartition<br><tt>${BackupPartition}</tt><br>nicht gefunden!"
