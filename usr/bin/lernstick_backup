@@ -23,6 +23,26 @@ then
 	exit 0
 fi
 
+show_error()
+{
+	TEXT="${1}"
+
+	if [ "$KDE_FULL_SESSION" ]
+	then
+		sudo -u user kdialog --error "${TEXT}" &
+	else
+		# zenity's HTML interpreter is so dumb, it doesn't even understand <br>...
+		# we need to replace it with "\\n"
+		ZENITY_TEXT="$(echo ${TEXT} | sed 's/<br>/\\n/g')"
+		echo "ZENITY_TEXT=\"${ZENITY_TEXT}\""
+		sudo -u user zenity --error --text "${ZENITY_TEXT}" &
+	fi
+
+	# another variant with notify-send instead of a dialog
+	# unfortunately, this doesn't work in Debian 8 GNOME
+	# sudo -u user notify-send -i dialog-error "${ERROR_MESSAGE}"
+}
+
 do_rdiff()
 {
 	# make sure that the backup destination directory exists
@@ -39,9 +59,7 @@ do_rdiff()
 	then
 		delete_old_backups "${DESTINATION}"
 	else
-		ERROR_MESSAGE="$(eval_gettext "<div align="left">Backup to<br><tt>\${DESTINATION}</tt><br>failed!</div>")"
-		sudo -u user notify-send -i dialog-error "${ERROR_MESSAGE}"
-		sudo -u user kdialog --error "${ERROR_MESSAGE}" &
+		show_error "$(eval_gettext "Backup to<br><tt>\${DESTINATION}</tt><br>failed!")"
 	fi
 }
 
@@ -111,7 +129,7 @@ do_backup()
 			fi
 			do_rdiff "${BackupSource}" "${MOUNT_POINT}/lernstick_backup"
 		else
-			sudo -u user notify-send -i dialog-error "$(eval_gettext "<div align="left">Backup partition<br><tt>\${BackupPartition}</tt><br>not found!</div>")"
+			show_error "$(eval_gettext "Backup partition<br><tt>\${BackupPartition}</tt><br>not found!")"
 		fi
 	fi
 }
