@@ -19,7 +19,6 @@ set -e
 
 case "$1" in
     remove|upgrade|deconfigure)
-	systemctl disable lernstick-backup
 	systemctl disable lernstick-final-backup
     ;;
 
