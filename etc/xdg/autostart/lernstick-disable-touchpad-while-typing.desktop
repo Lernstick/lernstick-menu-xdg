@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Encoding=UTF-8
-Version=1.0
-Name=Lernstick startscript
-Name[de_DE]=Lernstick-Startscript
-Exec=syndaemon -t -k -i 1.5
-X-GNOME-Autostart-enabled=true
