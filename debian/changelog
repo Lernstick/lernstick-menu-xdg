@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (7) lernstick-8; urgency=medium
+
+  * [7e6156] removed touchpad disabling autostart file (we now configure this in GNOME)
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 02 Sep 2015 16:52:26 +0200
+
 lernstick-menu-xdg-exam (6) lernstick-8; urgency=medium
 
   * [e21ac3] no longer run lernstick-backup from systemd
