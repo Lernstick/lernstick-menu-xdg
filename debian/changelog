@@ -1,4 +1,4 @@
-lernstick-8-menu-xdg-exam (11) lernstick-8; urgency=medium
+lernstick-menu-xdg-exam (11) lernstick-8; urgency=medium
 
   * [24108a] fixed if-statement
   * [51e63c] fixed German L10n
