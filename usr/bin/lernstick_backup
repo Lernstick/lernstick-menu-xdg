@@ -13,29 +13,40 @@ if [ -f ${CONFIG_FILE} ]
 then
 	. ${CONFIG_FILE}
 else
-	echo "${CONFIG_FILE} does not (yet) exist" >> ${LOG_FILE}
+	echo "${CONFIG_FILE} does not (yet) exist" | tee -a ${LOG_FILE}
 	exit 0
 fi
 
 if [ "${Backup}" != "true" ]
 then
-	echo "continuous backup is not enabled" >> ${LOG_FILE}
+	echo "continuous backup is not enabled" | tee -a ${LOG_FILE}
 	exit 0
 fi
 
 show_error()
 {
 	TEXT="${1}"
+	BLOCKING="${2}"
 
 	if [ "$KDE_FULL_SESSION" ]
 	then
-		sudo -u user kdialog --error "${TEXT}" &
+		if [ "${BLOCKING}" = "true" ]
+		then
+			sudo -u user kdialog --error "${TEXT}"
+		else
+			sudo -u user kdialog --error "${TEXT}" &
+		fi
 	else
 		# zenity's HTML interpreter is so dumb, it doesn't even understand <br>...
 		# we need to replace it with "\\n"
 		ZENITY_TEXT="$(echo ${TEXT} | sed 's/<br>/\\n/g')"
 		echo "ZENITY_TEXT=\"${ZENITY_TEXT}\""
-		sudo -u user zenity --error --text "${ZENITY_TEXT}" &
+		if [ "${BLOCKING}" = "true" ]
+		then
+			sudo -u user zenity --error --text "${ZENITY_TEXT}"
+		else
+			sudo -u user zenity --error --text "${ZENITY_TEXT}" &
+		fi
 	fi
 
 	# another variant with notify-send instead of a dialog
@@ -45,21 +56,66 @@ show_error()
 
 do_rdiff()
 {
-	# make sure that the backup destination directory exists
 	DESTINATION="${2}"
-	if [ ! -d "${DESTINATION}" ]
+
+	# check if we need to run a file system check
+	DEVICE="$(df "${DESTINATION}" | grep /dev/ | awk '{ print $1}')"
+	echo "backup destination device: ${DEVICE}" | tee -a ${LOG_FILE}
+	if mount | grep ^"${DEVICE}" | grep "(ro," > /dev/null
 	then
+		show_error "$(eval_gettext "The file system on the backup device (<tt>\${DEVICE}</tt>) seems to be corrupt.<br>An interactive file system repair will be started...")" "true"
+		#FS_TYPE="mount | grep ^/dev/sda2 | awk '{ print $5 }'"
+		#echo "backup destination filesystem: ${FS_TYPE}" | tee -a ${LOG_FILE}
+		FSCK_DONE_INFO="$(eval_gettext "File system check finished.\nYou can close this window now.")"
+		xterm -T "$(eval_gettext "File System Repair")" -hold -e "fsck.vfat -v -r -w ${DEVICE}; echo -e \"${FSCK_DONE_INFO}\""
+		mount -o remount,rw "${DEVICE}"
+	fi
+
+	# make sure that the backup destination directory exists
+	# (rdiff-backup can auto-create the destination directory but not the parents)
+	if [ ! -d "${DESTINATION}" ]
 		mkdir -p "${DESTINATION}"
 	fi
 
-	rdiff-backup -v5 "${1}" "${DESTINATION}" >> ${LOG_FILE} 2>&1
-	RETURN_VALUE=$?
-	echo "RETURN_VALUE=\"${RETURN_VALUE}\"" >> ${LOG_FILE}
-	if [ ${RETURN_VALUE} -eq 0 ]
+	if rdiff-backup -v5 "${1}" "${DESTINATION}" >> ${LOG_FILE} 2>&1
 	then
 		delete_old_backups "${DESTINATION}"
 	else
-		show_error "$(eval_gettext "Backup to<br><tt>\${DESTINATION}</tt><br>failed!")"
+		# Sometimes rdiff-backup just stumbles over its own feet and leaves a broken destination folder behind.
+		# Because interactive repairing can take too long and is too difficult for our users we have to use different fallback strategies.
+		# Our first fallback strategy is to rename the old backup folder and retry with a fresh one.
+		echo "retrying after renaming broken destination folder" | tee -a ${LOG_FILE}
+		rm -rf "${DESTINATION}.broken"
+		mv "${DESTINATION}" "${DESTINATION}.broken"
+		if rdiff-backup -v5 "${1}" "${DESTINATION}" >> ${LOG_FILE} 2>&1
+		then
+			delete_old_backups "${DESTINATION}"
+		else
+			ERROR_MESSAGE="$(eval_gettext "Backup to<br><tt>\${DESTINATION}</tt><br>failed!")"
+			# It didn't work with a new folder, so maybe we run out of disk space?
+			FREE_SPACE="$(df | grep ^${DEVICE} | awk '{ print $4}')"
+			if [ "${FREE_SPACE}" = "0" ]
+			then
+				echo "there is no free diskspace left" | tee -a ${LOG_FILE}
+				echo "retrying after removing all destination folders" | tee -a ${LOG_FILE}
+				rm -rf "${DESTINATION}*"
+				if rdiff-backup -v5 "${1}" "${DESTINATION}" >> ${LOG_FILE} 2>&1
+				then
+					delete_old_backups "${DESTINATION}"
+				else
+					FREE_SPACE="$(df | grep ^${DEVICE} | awk '{ print $4}')"
+					if [ "${FREE_SPACE}" = "0" ]
+					then
+						# show error message about full exchange partition
+						show_error "${ERROR_MESSAGE}<br>$(eval_gettext "There is no free space left on device <tt>\${DEVICE}</tt>!")"
+					else
+						show_error "${ERROR_MESSAGE}"
+					fi
+				fi
+			else
+				show_error "${ERROR_MESSAGE}"
+			fi
+		fi
 	fi
 }
 
@@ -75,19 +131,19 @@ delete_old_backups()
 	# There are at least 5 files per backup timestamp, so limiting the number
 	# of backups to 500 seems to be a good default.
 	MAX_COUNTER=500
-	echo "trying to keep only ${MAX_COUNTER} backups..." >> ${LOG_FILE}
+	echo "trying to keep only ${MAX_COUNTER} backups..." | tee -a ${LOG_FILE}
 	COUNTER=$(rdiff-backup -l --parsable-output "$1" | wc -l)
-	echo "There are ${COUNTER} backups" >> ${LOG_FILE}
+	echo "There are ${COUNTER} backups" | tee -a ${LOG_FILE}
 	OVERHEAD=$((${COUNTER}-${MAX_COUNTER}))
-	echo "overhead: ${OVERHEAD}" >> ${LOG_FILE}
+	echo "overhead: ${OVERHEAD}" | tee -a ${LOG_FILE}
 	if [ ${OVERHEAD} -gt 0 ]
 	then
-		echo "we should delete old backups" >> ${LOG_FILE}
+		echo "we should delete old backups" | tee -a ${LOG_FILE}
 		TIMESTAMP=$(rdiff-backup -l --parsable-output $1 | sed -n $((${OVERHEAD}+1))p | awk '{ print $1 }')
-		echo "last timestamp to keep: ${TIMESTAMP}" >> ${LOG_FILE}
+		echo "last timestamp to keep: ${TIMESTAMP}" | tee -a ${LOG_FILE}
 		rdiff-backup --force --remove-older-than ${TIMESTAMP} "$1"
 	else
-		echo "we don't need to delete old backups" >> ${LOG_FILE}
+		echo "we don't need to delete old backups" | tee -a ${LOG_FILE}
 	fi
 }
 
@@ -116,15 +172,15 @@ do_backup()
 		if [ ${BACKUP_DEVICE} ]
 		then
 			MOUNT_POINT="$(grep ${BACKUP_DEVICE} /proc/mounts | awk '{ print $2 }')"
-			echo "mount point of ${BACKUP_DEVICE}: \"${MOUNT_POINT}\"" >> ${LOG_FILE}
+			echo "mount point of ${BACKUP_DEVICE}: \"${MOUNT_POINT}\"" | tee -a ${LOG_FILE}
 			if [ -z "${MOUNT_POINT}" ]
 			then
-				MOUNT_DIR="/mnt/backup/"
+				MOUNT_DIR="/backup/"
 				MOUNT_POINT="${MOUNT_DIR}/${BackupPartition}"
 				mkdir -p "${MOUNT_POINT}"
 				chown root.root "${MOUNT_DIR}"
 				chmod 700  "${MOUNT_DIR}"
-				echo "calling \"mount ${BACKUP_DEVICE} ${MOUNT_POINT}\"" >> ${LOG_FILE}
+				echo "calling \"mount ${BACKUP_DEVICE} ${MOUNT_POINT}\"" | tee -a ${LOG_FILE}
 				mount ${BACKUP_DEVICE} "${MOUNT_POINT}"
 			fi
 			do_rdiff "${BackupSource}" "${MOUNT_POINT}/lernstick_backup"
@@ -134,39 +190,42 @@ do_backup()
 	fi
 }
 
-
-SIZE=$(wc -c < ${LOG_FILE})
-if [ "${SIZE}" != "0" ]
+# add newline if logfile is not empty
+if [ -f ${LOG_FILE} ]
 then
-	echo "" >> ${LOG_FILE}
+	SIZE=$(wc -c < ${LOG_FILE})
+	if [ "${SIZE}" != "0" ]
+	then
+		echo "" >> ${LOG_FILE}
+	fi
 fi
 
 if [ "$1" = "once" ]
 then
-	echo "FINAL backup run at $(date -R)" >> ${LOG_FILE}
+	echo "FINAL backup run at $(date -R)" | tee -a ${LOG_FILE}
 	do_backup
 else
 	TIMEOUT=$(expr ${BackupFrequency} \* 60)
 	while true; do
-		echo "backup run at $(date -R)" >> ${LOG_FILE}
+		echo "backup run at $(date -R)" | tee -a ${LOG_FILE}
 
 		# get current time
 		BEFORE="$(date +%s)"
-		echo "system time in seconds before running backup: ${BEFORE}" >> ${LOG_FILE}
+		echo "system time in seconds before running backup: ${BEFORE}" | tee -a ${LOG_FILE}
 
 		# execute command
 		do_backup
 
 		# wait until TIMEOUT is over
 		AFTER="$(date +%s)"
-		echo "system time in seconds after running backup: ${AFTER}" >> ${LOG_FILE}
+		echo "system time in seconds after running backup: ${AFTER}" | tee -a ${LOG_FILE}
 		SLEEP=$(expr ${TIMEOUT} - ${AFTER} + ${BEFORE})
 		if [ ${SLEEP} -gt 0 ]
 		then
-			echo "sleeping for ${SLEEP} seconds..." >> ${LOG_FILE}
+			echo "sleeping for ${SLEEP} seconds..." | tee -a ${LOG_FILE}
 			sleep ${SLEEP}
 		else
-			echo "timeout already passed!" >> ${LOG_FILE}
+			echo "timeout already passed!" | tee -a ${LOG_FILE}
 		fi
 	done
 fi
