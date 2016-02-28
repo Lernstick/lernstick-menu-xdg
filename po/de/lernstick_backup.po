@@ -28,7 +28,7 @@ msgstr ""
 #: usr/bin/lernstick_backup:69
 #, sh-format
 msgid "File system check finished.\\nYou can close this window now."
-msgstr "Die Dateisystemreparatur ist beendet.\\Sie können dieses Fenster nun schließen."
+msgstr "Die Dateisystemreparatur ist beendet.\\nSie können dieses Fenster nun schließen."
 
 #: usr/bin/lernstick_backup:70
 #, sh-format
