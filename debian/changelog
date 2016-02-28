@@ -1,3 +1,10 @@
+lernstick-8-menu-xdg-exam (11) lernstick-8; urgency=medium
+
+  * [24108a] fixed if-statement
+  * [51e63c] fixed German L10n
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 28 Feb 2016 19:22:29 +0100
+
 lernstick-menu-xdg-exam (10) lernstick-8; urgency=medium
 
   * [87e26e] added dependency to xtermn
