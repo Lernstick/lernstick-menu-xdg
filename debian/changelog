@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (9) lernstick-8; urgency=medium
+
+  * [e6385c] updated Germnan L10n
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 28 Feb 2016 19:13:36 +0100
+
 lernstick-menu-xdg-exam (8) lernstick-8; urgency=medium
 
   * [23157a] added file system check and fallback strategies to backup script
