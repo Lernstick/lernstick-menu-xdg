@@ -74,6 +74,7 @@ do_rdiff()
 	# make sure that the backup destination directory exists
 	# (rdiff-backup can auto-create the destination directory but not the parents)
 	if [ ! -d "${DESTINATION}" ]
+	then
 		mkdir -p "${DESTINATION}"
 	fi
 
