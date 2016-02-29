@@ -54,12 +54,27 @@ show_error()
 	# sudo -u user notify-send -i dialog-error "${ERROR_MESSAGE}"
 }
 
+get_existing_parent()
+{
+        DIRECTORY="${1}"
+        while [ ! -d ${DIRECTORY} ]
+        do
+                DIRECTORY="$(dirname "${DIRECTORY}")"
+        done
+        echo "${DIRECTORY}"
+}
+
 do_rdiff()
 {
 	DESTINATION="${2}"
 
+	# Sometimes the destination directory doesn't exist yet.
+	# In this case the call to df below would fail.
+	# Therefore we have to search an existing (parent) directory for df.
+	EXISTING_PARENT=$(get_existing_parent "${DESTINATION}")
+	echo "existing parent directory: ${EXISTING_PARENT}" | tee -a ${LOG_FILE}
 	# check if we need to run a file system check
-	DEVICE="$(df "${DESTINATION}" | grep /dev/ | awk '{ print $1}')"
+	DEVICE="$(df "${EXISTING_PARENT}" | grep /dev/ | awk '{ print $1}')"
 	echo "backup destination device: ${DEVICE}" | tee -a ${LOG_FILE}
 	if mount | grep ^"${DEVICE}" | grep "(ro," > /dev/null
 	then
@@ -72,7 +87,8 @@ do_rdiff()
 	fi
 
 	# make sure that the backup destination directory exists
-	# (rdiff-backup can auto-create the destination directory but not the parents)
+	# (rdiff-backup can auto-create the leaf destination directory but not
+	# all parent directories)
 	if [ ! -d "${DESTINATION}" ]
 	then
 		mkdir -p "${DESTINATION}"
@@ -82,9 +98,12 @@ do_rdiff()
 	then
 		delete_old_backups "${DESTINATION}"
 	else
-		# Sometimes rdiff-backup just stumbles over its own feet and leaves a broken destination folder behind.
-		# Because interactive repairing can take too long and is too difficult for our users we have to use different fallback strategies.
-		# Our first fallback strategy is to rename the old backup folder and retry with a fresh one.
+		# Sometimes rdiff-backup just stumbles over its own feet and
+		# leaves a broken destination folder behind. Because
+		# interactive repairing can take too long and is too difficult
+		# for our users we have to use different fallback strategies.
+		# Our first fallback strategy is to rename the old backup
+		# folder and retry with a fresh one.
 		echo "retrying after renaming broken destination folder" | tee -a ${LOG_FILE}
 		rm -rf "${DESTINATION}.broken"
 		mv "${DESTINATION}" "${DESTINATION}.broken"
@@ -99,7 +118,8 @@ do_rdiff()
 			then
 				echo "there is no free diskspace left" | tee -a ${LOG_FILE}
 				echo "retrying after removing all destination folders" | tee -a ${LOG_FILE}
-				rm -rf "${DESTINATION}*"
+				rm -rf "${DESTINATION}"
+				rm -rf "${DESTINATION}.broken"
 				if rdiff-backup -v5 "${1}" "${DESTINATION}" >> ${LOG_FILE} 2>&1
 				then
 					delete_old_backups "${DESTINATION}"
