@@ -67,23 +67,27 @@ get_existing_parent()
 do_rdiff()
 {
 	DESTINATION="${2}"
+	echo "planned destination directory: ${DESTINATION}" | tee -a ${LOG_FILE}
 
 	# Sometimes the destination directory doesn't exist yet.
 	# In this case the call to df below would fail.
 	# Therefore we have to search an existing (parent) directory for df.
 	EXISTING_PARENT=$(get_existing_parent "${DESTINATION}")
-	echo "existing parent directory: ${EXISTING_PARENT}" | tee -a ${LOG_FILE}
+	echo "existing destination parent directory: ${EXISTING_PARENT}" | tee -a ${LOG_FILE}
 	# check if we need to run a file system check
 	DEVICE="$(df "${EXISTING_PARENT}" | grep /dev/ | awk '{ print $1}')"
-	echo "backup destination device: ${DEVICE}" | tee -a ${LOG_FILE}
-	if mount | grep ^"${DEVICE}" | grep "(ro," > /dev/null
+	if [ -n "${DEVICE}" ]
 	then
-		show_error "$(eval_gettext "The file system on the backup device (<tt>\${DEVICE}</tt>) seems to be corrupt.<br>An interactive file system repair will be started...")" "true"
-		#FS_TYPE="mount | grep ^/dev/sda2 | awk '{ print $5 }'"
-		#echo "backup destination filesystem: ${FS_TYPE}" | tee -a ${LOG_FILE}
-		FSCK_DONE_INFO="$(eval_gettext "File system check finished.\nYou can close this window now.")"
-		xterm -T "$(eval_gettext "File System Repair")" -hold -e "fsck.vfat -v -r -w ${DEVICE}; echo -e \"${FSCK_DONE_INFO}\""
-		mount -o remount,rw "${DEVICE}"
+		echo "backup destination device: ${DEVICE}" | tee -a ${LOG_FILE}
+		if mount | grep ^"${DEVICE}" | grep "(ro," > /dev/null
+		then
+			show_error "$(eval_gettext "The file system on the backup device (<tt>\${DEVICE}</tt>) seems to be corrupt.<br>An interactive file system repair will be started...")" "true"
+			#FS_TYPE="mount | grep ^/dev/sda2 | awk '{ print $5 }'"
+			#echo "backup destination filesystem: ${FS_TYPE}" | tee -a ${LOG_FILE}
+			FSCK_DONE_INFO="$(eval_gettext "File system check finished.\nYou can close this window now.")"
+			xterm -T "$(eval_gettext "File System Repair")" -hold -e "fsck.vfat -v -r -w ${DEVICE}; echo -e \"${FSCK_DONE_INFO}\""
+			mount -o remount,rw "${DEVICE}"
+		fi
 	fi
 
 	# make sure that the backup destination directory exists
