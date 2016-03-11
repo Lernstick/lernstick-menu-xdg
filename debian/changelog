@@ -1,8 +1,14 @@
+lernstick-menu-xdg-exam (14) lernstick-8; urgency=medium
+
+  * [95ed44] don't fail if no backup device is found (backup to other directory without exchange partition is ok)
+
+ -- Ronny Standtke <ronny.standtke@fhnw.ch>  Fri, 11 Mar 2016 13:31:05 +0100
+
 lernstick-menu-xdg-exam (13) lernstick-8; urgency=medium
 
   * [af4c6b] some fixes to file system checking and fallback stragegy in lernstick_backup
 
- -- Ronny Standtke <ronny.standtke@gmx.net>  Mon, 29 Feb 2016 08:29:56 +0100
+ -- Ronny Standtke <ronny.standtke@fhnw.ch>  Mon, 29 Feb 2016 08:29:56 +0100
 
 lernstick-menu-xdg-exam (12) lernstick-8; urgency=medium
 
