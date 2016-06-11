@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# gettext support
+. gettext.sh
+export TEXTDOMAIN=detect_virtualization
+
+VIRTUALIZATION="$(systemd-detect-virt)"
+
+if [ "${VIRTUALIZATION}" != "none" ]
+then
+	TMP_FILE="/tmp/virtualization_lock.jpg"
+
+        convert /usr/share/backgrounds/gnome/Fabric.jpg \
+                -background black \
+                -fill white \
+                -pointsize 90 \
+                -gravity South \
+                -splice 0x220 \
+                -annotate +0+20 "$(eval_gettext "Virtualization (\${VIRTUALIZATION}) detected\nLogin required")" \
+                -append \
+                "${TMP_FILE}"
+
+	dconf write /org/gnome/desktop/screensaver/picture-uri "'file://${TMP_FILE}'"
+	dconf write /org/gnome/desktop/screensaver/picture-options="'stretched'"
+	dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
+
+	# https://bugzilla.gnome.org/show_bug.cgi?id=710904
+	for i in 1 2 3 4 5
+	do
+		xdotool key F2
+		sleep 1
+	done
+fi

@@ -3,17 +3,24 @@ Initialisierung
 mkdir -p po/de
 xgettext -L Shell --add-comments=## usr/bin/lernstick_autostart
 vi messages.po #header richtig füllen
-cp messages.po po/de_CH/lernstick_autostart.po
-vi po/de_CH/lernstick_autostart.po # erste Übersetzung
+cp messages.po po/de/lernstick_autostart.po
+vi po/de/lernstick_autostart.po # erste Übersetzung
 cd po; for i in *; do cd $i; msgfmt -o lernstick_autostart.mo lernstick_autostart.po; cd ..; done; cd ..
 cd po; for i in *; do cd $i; MDIR="../../usr/share/locale/$i/LC_MESSAGES/"; mkdir -p ${MDIR}; rm -f ${MDIR}/lernstick_autostart.mo; cp lernstick_autostart.mo ${MDIR}; cd ..; done; cd ..
 
 xgettext -L Shell --add-comments=## usr/bin/lernstick_backup
 vi messages.po #header richtig füllen
-cp messages.po po/de_CH/lernstick_backup.po
-vi po/de_CH/lernstick_backup.po # erste Übersetzung
+cp messages.po po/de/lernstick_backup.po
+vi po/de/lernstick_backup.po # erste Übersetzung
 cd po; for i in *; do cd $i; msgfmt -o lernstick_backup.mo lernstick_backup.po; cd ..; done; cd ..
 cd po; for i in *; do cd $i; MDIR="../../usr/share/locale/$i/LC_MESSAGES/"; mkdir -p ${MDIR}; rm -f ${MDIR}/lernstick_backup.mo; cp lernstick_backup.mo ${MDIR}; cd ..; done; cd ..
+
+xgettext -L Shell --add-comments=## usr/bin/detect_virtualization
+vi messages.po #header richtig füllen
+cp messages.po po/de/detect_virtualization.po
+vi po/de/detect_virtualization.po # erste Übersetzung
+cd po; for i in *; do cd $i; msgfmt -o detect_virtualization.mo detect_virtualization.po; cd ..; done; cd ..
+cd po; for i in *; do cd $i; MDIR="../../usr/share/locale/$i/LC_MESSAGES/"; mkdir -p ${MDIR}; rm -f ${MDIR}/detect_virtualization.mo; cp detect_virtualization.mo ${MDIR}; cd ..; done; cd ..
 
 Update:
 -------

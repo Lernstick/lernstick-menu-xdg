@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Version=1.0
+Name=Virtualization detection
+Name[de_DE]=Erkennung von Virtualisierung
+Exec=detect_virtualization
+X-GNOME-Autostart-enabled=true
