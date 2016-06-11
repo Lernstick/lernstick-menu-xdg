@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (15) lernstick-8; urgency=medium
+
+  * [78650f] added virtualization detection
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 11 Jun 2016 21:51:58 +0200
+
 lernstick-menu-xdg-exam (14) lernstick-8; urgency=medium
 
   * [95ed44] don't fail if no backup device is found (backup to other directory without exchange partition is ok)
