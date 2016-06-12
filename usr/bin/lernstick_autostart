@@ -139,9 +139,6 @@ then
 		START="true"
 	fi
 
-	# show info about default passwort in exam environment
-        kdialog --msgbox "$(gettext "A password is needed for all administrative actions.<br>The default password is empty (just press <tt>ENTER</tt>).<br>To secure the exam environment you must change<br>the password in the welcome application.")" --dontagain empty_passwd_info:show
-
 	if [ -n "${START}" ]
 	then
 		# call pkexec directly as gtk-launch in run_desktop_file fails with "Refusing to render service to dead parents."
