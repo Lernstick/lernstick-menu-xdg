@@ -106,6 +106,12 @@ run_desktop_file()
 	fi
 }
 
+disable_software_upgrades()
+{
+	gsettings set org.gnome.software download-updates false
+	sudo sed -i 's/"1"/"0"/' /etc/apt/apt.conf.d/20auto-upgrades
+}
+
 CONFIG_FILE="/etc/lernstickWelcome"
 
 # start installer or welcome program
@@ -138,11 +144,16 @@ then
 
 	if [ -n "${START}" ]
 	then
-		run_desktop_file "/usr/share/applications/ch-fhnw-lernstickwelcome-welcome.desktop"
+		# call pkexec directly as gtk-launch in run_desktop_file fails with "Refusing to render service to dead parents."
+		# TODO: revert when gtk-launch is fixed
+		# run_desktop_file "/usr/share/applications/ch-fhnw-lernstickwelcome-welcome.desktop"
+		pkexec lernstickWelcome
 	fi
 
 elif echo "${COW}" | grep -q "ro,"
 then
+	disable_software_upgrades
+
 	echo "data partition is in read-only mode -> try showing information dialog..."
 	if [ -e ${CONFIG_FILE} ]
 	then
@@ -165,6 +176,9 @@ then
 else
 	# data partition is not used, we can NOT install additional programs
 	# but we can copy the system
+
+	disable_software_upgrades
+
 	echo "data partition is NOT used"
 	if [ -e ${CONFIG_FILE} ]
 	then
@@ -180,7 +194,10 @@ else
 		if grep -q "AutoStartInstaller=true" ${CONFIG_FILE}
 		then
 			echo "persistency disabled -> try starting dlcopy..."
-			run_desktop_file "/usr/share/applications/ch-fhnw-dlcopy-dlcopy.desktop"
+			# call pkexec directly as gtk-launch in run_desktop_file fails with "Refusing to render service to dead parents."
+			# TODO: revert when gtk-launch is fixed
+			# run_desktop_file "/usr/share/applications/ch-fhnw-dlcopy-dlcopy.desktop"
+			pkexec dlcopy
 		else
 			echo "installer autostart not configured in config file"
 		fi
