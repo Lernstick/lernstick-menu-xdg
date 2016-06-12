@@ -1,3 +1,10 @@
+lernstick-menu-xdg-exam (16) lernstick-8; urgency=medium
+
+  * [0add66] added xdotool to dependencies
+  * [8e6928] added imagemagick and systemd to dependencies
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 12 Jun 2016 14:08:47 +0200
+
 lernstick-menu-xdg-exam (15) lernstick-8; urgency=medium
 
   * [78650f] added virtualization detection
