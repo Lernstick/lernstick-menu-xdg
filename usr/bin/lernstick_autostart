@@ -141,7 +141,10 @@ then
 
 	if [ -n "${START}" ]
 	then
-		run_desktop_file "/usr/share/applications/ch-fhnw-lernstickwelcome-welcome.desktop"
+		# call pkexec directly as gtk-launch in run_desktop_file fails with "Refusing to render service to dead parents."
+		# TODO: revert when gtk-launch is fixed
+		# run_desktop_file "/usr/share/applications/ch-fhnw-lernstickwelcome-welcome.desktop"
+		pkexec lernstickWelcome
 	fi
 
 elif echo "${COW}" | grep -q "ro,"
@@ -188,7 +191,10 @@ else
 		if grep -q "AutoStartInstaller=true" ${CONFIG_FILE}
 		then
 			echo "persistency disabled -> try starting dlcopy..."
-			run_desktop_file "/usr/share/applications/ch-fhnw-dlcopy-dlcopy.desktop"
+			# call pkexec directly as gtk-launch in run_desktop_file fails with "Refusing to render service to dead parents."
+			# TODO: revert when gtk-launch is fixed
+			# run_desktop_file "/usr/share/applications/ch-fhnw-dlcopy-dlcopy.desktop"
+			pkexec dlcopy
 		else
 			echo "installer autostart not configured in config file"
 		fi
