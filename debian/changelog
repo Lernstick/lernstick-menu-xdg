@@ -1,3 +1,11 @@
+lernstick-menu-xdg (14) lernstick-8; urgency=medium
+
+  * [b36898] call pkexec directly because gtk-launch fails starting the new
+    desktop files with the error message "Refusing to render service to dead
+    parents."
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 12 Jun 2016 17:12:17 +0200
+
 lernstick-menu-xdg (13) lernstick-8; urgency=medium
 
   * [f730fd] disable software upgrades when data partition is not writable
