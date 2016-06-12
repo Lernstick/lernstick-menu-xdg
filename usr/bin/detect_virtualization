@@ -1,5 +1,11 @@
 #!/bin/sh
 
+if [ ! -e /etc/polkit-1/localauthority/50-local.d/10-welcome.pkla ]
+then
+        # as long as the user didn't set a password we allow everything...
+        exit 0
+fi
+
 # gettext support
 . gettext.sh
 export TEXTDOMAIN=detect_virtualization
