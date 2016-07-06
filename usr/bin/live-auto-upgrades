@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# This script disables unattended upgrades when we don't find any writable
+# persistent media.
+
+COW=$(grep /lib/live/mount/persistence /proc/mounts | grep -v ^tmpfs | grep -v ^aufs)
+
+if [ -z "${COW}" ] || echo "${COW}" | grep -q "ro,"
+then
+        sed -i 's/"1"/"0"/' /etc/apt/apt.conf.d/20auto-upgrades
+fi

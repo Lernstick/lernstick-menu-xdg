@@ -109,7 +109,6 @@ run_desktop_file()
 disable_software_upgrades()
 {
 	gsettings set org.gnome.software download-updates false
-	sudo sed -i 's/"1"/"0"/' /etc/apt/apt.conf.d/20auto-upgrades
 }
 
 CONFIG_FILE="/etc/lernstickWelcome"
