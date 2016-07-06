@@ -1,3 +1,9 @@
+lernstick-menu-xdg (16) lernstick-8; urgency=medium
+
+  * [53f4ef] fixed debian rules to install systemd service files
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 06 Jul 2016 19:14:18 +0200
+
 lernstick-menu-xdg (15) lernstick-8; urgency=medium
 
   * [aee071] added systemd service to disable auto upgrades when no persistent
