@@ -1,3 +1,12 @@
+lernstick-menu-xdg-exam (20) lernstick-8; urgency=medium
+
+  * [aee071] added systemd service to disable auto upgrades when no persistent
+     storage media is found
+  * [d4d32d] removed disabling auto-upgrades from xdg-autostart file
+  * [53f4ef] fixed debian rules to install systemd service files
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 06 Jul 2016 19:29:07 +0200
+
 lernstick-menu-xdg-exam (19) lernstick-8; urgency=medium
 
   * [f730fd] disable software upgrades when data partition is not writable
