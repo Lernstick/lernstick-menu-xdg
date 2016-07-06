@@ -1,3 +1,10 @@
+lernstick-menu-xdg (15) lernstick-8; urgency=medium
+
+  * [aee071] added systemd service to disable auto upgrades when no persistent
+    storage media is found
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 06 Jul 2016 18:37:46 +0200
+
 lernstick-menu-xdg (14) lernstick-8; urgency=medium
 
   * [b36898] call pkexec directly because gtk-launch fails starting the new
