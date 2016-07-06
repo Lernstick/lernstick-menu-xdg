@@ -62,6 +62,7 @@ binary-arch: build install
 	dh_installman
 	dh_link
 	dh_strip
+	dh_systemd_enable
 	dh_compress
 	dh_fixperms
 #	dh_perl
