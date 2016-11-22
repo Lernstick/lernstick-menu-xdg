@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (21) lernstick-8; urgency=medium
+
+  * [7b5eaf] fixed GNOME keyboard changes in autostart script
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Tue, 22 Nov 2016 22:39:32 +0100
+
 lernstick-menu-xdg-exam (20) lernstick-8; urgency=medium
 
   * [aee071] added systemd service to disable auto upgrades when no persistent
