@@ -56,7 +56,18 @@ then
 	done
 
 	# configure GNOME
-	gsettings set org.gnome.desktop.input-sources sources "[${GNOME_INPUT_SOURCES}]"
+	# For whatever reason, when this autostart script is run, GNOME is *still* not ready to
+	# accept changes to the input sources. Therefore we have to place the following calls into
+	# a subshell that waits a little longer before actually executing the commands. In addition
+	# to that we have to empty the intput sources first, otherwise GNOME doesn't switch to the
+	# first index of our new input sources. To add insult to injury, we have to wait *again*
+	# between both gsettings calls, otherwise the first call is just ignored.
+	(
+		sleep 5;
+		gsettings set org.gnome.desktop.input-sources sources "[]"
+		sleep 1;
+		gsettings set org.gnome.desktop.input-sources sources "[${GNOME_INPUT_SOURCES}]"
+	)&
 
 	# configure Cinnamon
 	# unfortunately, we are too late here for full configuration, Cinnamon already determined its default
