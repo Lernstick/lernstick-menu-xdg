@@ -1,3 +1,9 @@
+lernstick-menu-xdg (17) lernstick-8; urgency=medium
+
+  * [7b5eaf] fixed GNOME keyboard changes in autostart script
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Tue, 22 Nov 2016 22:29:24 +0100
+
 lernstick-menu-xdg (16) lernstick-8; urgency=medium
 
   * [53f4ef] fixed debian rules to install systemd service files
