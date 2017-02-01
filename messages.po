@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-18 13:15+0200\n"
+"POT-Creation-Date: 2017-02-01 11:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,14 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: usr/bin/lernstick_autostart:51
-msgid ""
-"A password is needed for all administrative actions.<br>The default password "
-"is empty (just press <tt>ENTER</tt>).<br>To secure the exam environment you "
-"must change<br>the password in the welcome application."
-msgstr ""
-
-#: usr/bin/lernstick_autostart:78
+#: usr/bin/lernstick_autostart:179
 msgid ""
 "The data partition is in <b>read-only mode</b>.<br><br>This means that all "
 "modifications you might have done previously<br>are visible but all "
@@ -34,7 +27,7 @@ msgid ""
 "media</b>.)"
 msgstr ""
 
-#: usr/bin/lernstick_autostart:87
+#: usr/bin/lernstick_autostart:195
 msgid ""
 "There is <b>no data partition in use</b>.<br><br>This means that all "
 "modifications you might have done previously<br>are now <b>invisible</b> and "
@@ -42,4 +35,12 @@ msgid ""
 "restart the system.<br><br>(If you now change files and want to keep them, "
 "you need to<br>save them on the exchange partition or other <b>external "
 "media</b>.)"
+msgstr ""
+
+#: usr/bin/lernstick_autostart:214
+msgid ""
+"Welcome to your <b>exam</b>.<br><br>The exam has started now. As soon as you "
+"are done, please doubleclick the icon<br> at the desktop to finish the exam. "
+"Once the finish process is initiated you<br><b>cannot continue</b> with the "
+"exam. So, please make sure you completed your exam.<br><br><b>Good luck!</b>"
 msgstr ""
