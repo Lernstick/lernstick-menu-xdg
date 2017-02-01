@@ -208,6 +208,15 @@ else
 		else
 			echo "installer autostart not configured in config file"
 		fi
+
+                if grep -q "ShowExamInfo=true" ${CONFIG_FILE}
+                then
+                        TEXT="$(gettext "Welcome to your <b>exam</b>.<br><br>The exam has started now. As soon as you are done, please doubleclick the icon<br> at the desktop to finish the exam. Once the finish process is initiated you<br><b>cannot continue</b> with the exam. So, please make sure you completed your exam.<br><br><b>Good luck!</b>")"
+                        show_dialog "${TEXT}"
+                else
+                        echo "exam info dialog not configured in config file"
+                fi
+
 	else
 		echo "no lernstickWelcome config file -> no dialog and autostart"
 	fi
