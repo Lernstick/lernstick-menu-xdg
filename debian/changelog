@@ -1,3 +1,10 @@
+lernstick-menu-xdg-exam (22) lernstick-8; urgency=medium
+
+  * [b113bc] Changed screenshot images to jpeg and compressed them with imagemagick
+  * [133e87] fixed live-auto-upgrades service file
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Thu, 09 Mar 2017 12:33:55 +0100
+
 lernstick-menu-xdg-exam (21) lernstick-8; urgency=medium
 
   * [7b5eaf] fixed GNOME keyboard changes in autostart script
