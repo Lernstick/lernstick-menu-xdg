@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (23) lernstick-8; urgency=medium
+
+  * [2e6590] fixed live-auto-upgrades.service (for real)
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Thu, 09 Mar 2017 15:45:35 +0100
+
 lernstick-menu-xdg-exam (22) lernstick-8; urgency=medium
 
   * [b113bc] Changed screenshot images to jpeg and compressed them with imagemagick
