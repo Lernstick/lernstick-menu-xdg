@@ -1,3 +1,9 @@
+lernstick-menu-xdg (19) lernstick-8; urgency=medium
+
+  * [2e6590] fixed live-auto-upgrades.service (for real)
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Thu, 09 Mar 2017 15:35:14 +0100
+
 lernstick-menu-xdg (18) lernstick-8; urgency=medium
 
   * [133e87] fixed live-auto-upgrades service file
