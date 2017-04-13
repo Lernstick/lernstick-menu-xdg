@@ -1,3 +1,9 @@
+lernstick-menu-xdg (20) lernstick-8; urgency=medium
+
+  * [51779d] added nuvola-icon-theme to dependencies (used in our custom desktop directories)
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Thu, 13 Apr 2017 17:09:36 +0200
+
 lernstick-menu-xdg (19) lernstick-8; urgency=medium
 
   * [2e6590] fixed live-auto-upgrades.service (for real)
