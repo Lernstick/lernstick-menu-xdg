@@ -1,3 +1,9 @@
+lernstick-menu-xdg (21) lernstick-9; urgency=medium
+
+  * use kdialog also in other desktop environments as zenity is broken again
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 26 May 2017 14:29:49 +0200
+
 lernstick-menu-xdg (20) lernstick-8; urgency=medium
 
   * [51779d] added nuvola-icon-theme to dependencies (used in our custom desktop directories)
