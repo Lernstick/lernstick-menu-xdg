@@ -92,9 +92,13 @@ show_dialog ()
 	else
 		# zenity's HTML interpreter is so dumb, it doesn't even understand <br>...
 		# we need to replace it with "\\n"
-		ZENITY_TEXT="$(echo ${TEXT} | sed 's/<br>/\\n/g')"
-		echo "ZENITY_TEXT=\"${ZENITY_TEXT}\""
-		zenity --info --text "${ZENITY_TEXT}"
+		#ZENITY_TEXT="$(echo ${TEXT} | sed 's/<br>/\\n/g')"
+		#echo "ZENITY_TEXT=\"${ZENITY_TEXT}\""
+		#zenity --info --text "${ZENITY_TEXT}"
+
+		# the layout of the zenity dialog is so broken that we have to use kdialog in GNOME
+		# (was broken in Debian 7, fixed in Debian 8, broken again in Debian 9)
+		kdialog --msgbox "${TEXT}"
 	fi
 }
 
