@@ -1,3 +1,9 @@
+lernstick-menu-xdg (22) lernstick-9; urgency=medium
+
+  * adapted icon paths to Debian 9
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 14 Jun 2017 22:48:48 +0200
+
 lernstick-menu-xdg (21) lernstick-9; urgency=medium
 
   * use kdialog also in other desktop environments as zenity is broken again
