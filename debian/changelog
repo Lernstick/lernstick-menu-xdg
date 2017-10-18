@@ -1,3 +1,11 @@
+lernstick-menu-xdg-exam (24) lernstick-9; urgency=medium
+
+  * [e3d404] use kdialog also in other desktop environments as zenity is broken
+             again
+  * [cf7674] added dependencies for kdialog and zenity
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 18 Oct 2017 10:38:25 +0200
+
 lernstick-menu-xdg-exam (23) lernstick-8; urgency=medium
 
   * [2e6590] fixed live-auto-upgrades.service (for real)
