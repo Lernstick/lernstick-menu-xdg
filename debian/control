@@ -8,7 +8,7 @@ Standards-Version: 3.7.3
 
 Package: lernstick-menu-xdg-exam
 Architecture: all
-Depends: menu-xdg, kde-runtime | libgtk-3-bin, gettext, xterm, xdotool, imagemagick, systemd
+Depends: menu-xdg, kde-runtime | libgtk-3-bin, gettext, xterm, xdotool, imagemagick, systemd, kde-baseapps-bin, zenity
 Description: Removes the Debian menu from the start menu
  The Debian menu is one of the worst ideas in Debian. Who on earth thinks
  that a second main level menu structure is something users understand?
