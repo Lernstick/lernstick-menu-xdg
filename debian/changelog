@@ -1,3 +1,10 @@
+lernstick-menu-xdg-exam (25) lernstick-9; urgency=medium
+
+  * [31256c] adapted icon paths to Debian 9
+  * [4ea2f9] use new dlcopy.user script in lernstick_autostart
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 06 Dec 2017 17:36:06 +0100
+
 lernstick-menu-xdg-exam (24) lernstick-9; urgency=medium
 
   * [e3d404] use kdialog also in other desktop environments as zenity is broken
