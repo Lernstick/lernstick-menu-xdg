@@ -208,7 +208,7 @@ else
 			# call pkexec directly as gtk-launch in run_desktop_file fails with "Refusing to render service to dead parents."
 			# TODO: revert when gtk-launch is fixed
 			# run_desktop_file "/usr/share/applications/ch-fhnw-dlcopy-dlcopy.desktop"
-			pkexec dlcopy
+			dlcopy.user
 		else
 			echo "installer autostart not configured in config file"
 		fi
