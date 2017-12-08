@@ -1,6 +1,7 @@
 #!/bin/sh
 
-if [ ! -e /etc/polkit-1/localauthority/50-local.d/10-welcome.pkla ]
+if [ ! -e /etc/polkit-1/localauthority/50-local.d/10-welcome.pkla ] &&
+   [ ! -e /etc/polkit-1/localauthority/55-lernstick-exam.d/10-welcome_strict.pkla ]
 then
         # as long as the user didn't set a password we allow everything...
         exit 0
