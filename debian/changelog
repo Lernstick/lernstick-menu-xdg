@@ -1,3 +1,10 @@
+lernstick-menu-xdg-exam (27) lernstick-9; urgency=medium
+
+  * [965ae9] disabled timout calculation
+    (breaks when system time gets updated during backup run)
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Thu, 21 Dec 2017 11:26:27 +0100
+
 lernstick-menu-xdg-exam (26) lernstick-9; urgency=medium
 
   * [0e5d32] completed password logic in virtualization detection
