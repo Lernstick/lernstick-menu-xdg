@@ -258,7 +258,13 @@ else
 		# wait until TIMEOUT is over
 		AFTER="$(date +%s)"
 		echo "system time in seconds after running backup: ${AFTER}" | tee -a ${LOG_FILE}
-		SLEEP=$(expr ${TIMEOUT} - ${AFTER} + ${BEFORE})
+		# Now that we enabled ntp updates in the exam environment, the following
+		# timeout calucation breaks when the system time changes while the backup
+		# running. Yes, we already run into this issue in the real world during a real exam...
+		# Therefore we simply sleep for the configured timeout instead of trying to
+		# stay close to the configured backup frequency.
+		# SLEEP=$(expr ${TIMEOUT} - ${AFTER} + ${BEFORE})
+		SLEEP=${TIMEOUT}
 		if [ ${SLEEP} -gt 0 ]
 		then
 			echo "sleeping for ${SLEEP} seconds..." | tee -a ${LOG_FILE}
