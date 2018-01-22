@@ -1,3 +1,10 @@
+lernstick-menu-xdg (24) lernstick-9; urgency=medium
+
+  [ Thore Sommer ]
+  * created lernstick.merge.menu for Mate and Plasma
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Mon, 22 Jan 2018 11:19:35 +0100
+
 lernstick-menu-xdg (23) lernstick-9; urgency=medium
 
   * [4ea2f9] use new dlcopy.user script in lernstick_autostart
