@@ -1,3 +1,9 @@
+lernstick-menu-xdg (25) lernstick-9; urgency=medium
+
+  * [b6ca3c] huge cleanup for KDE, LXDE, MATE and Xfce
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 02 Feb 2018 22:14:24 +0100
+
 lernstick-menu-xdg (24) lernstick-9; urgency=medium
 
   [ Thore Sommer ]
