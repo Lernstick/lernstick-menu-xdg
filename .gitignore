@@ -1,6 +1,10 @@
 build-stamp                                                                                                                                                                                                                                                            
 configure-stamp                                                                                                                                                                                                                                                        
+debian/debhelper-build-stamp
 debian/files
-debian/lernstick-menu-xdg.debhelper.log
-debian/lernstick-menu-xdg.substvars
-debian/lernstick-menu-xdg/
+debian/lernstick-menu-xdg2/
+debian/lernstick-menu-xdg2.debhelper.log
+debian/lernstick-menu-xdg2.postinst.debhelper
+debian/lernstick-menu-xdg2.postrm.debhelper
+debian/lernstick-menu-xdg2.prerm.debhelper
+debian/lernstick-menu-xdg2.substvars

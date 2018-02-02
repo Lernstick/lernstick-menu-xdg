@@ -1,0 +1,13 @@
+/etc/xdg/menus/kf5-applications.menu.lernstick
+/etc/xdg/menus/lxde-applications.menu.lernstick
+/etc/xdg/menus/mate-applications.menu.lernstick
+/etc/xdg/menus/xfce-applications.menu.lernstick
+/usr/share/desktop-directories/kf5-edu-languages.directory.lernstick
+/usr/share/desktop-directories/kf5-edu-mathematics.directory.lernstick
+/usr/share/desktop-directories/kf5-edu-miscellaneous.directory.lernstick
+/usr/share/desktop-directories/kf5-games-arcade.directory.lernstick
+/usr/share/desktop-directories/kf5-games-board.directory.lernstick
+/usr/share/desktop-directories/kf5-games-card.directory.lernstick
+/usr/share/desktop-directories/kf5-games-kids.directory.lernstick
+/usr/share/desktop-directories/kf5-games-logic.directory.lernstick
+/usr/share/desktop-directories/kf5-games-strategy.directory.lernstick
