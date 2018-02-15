@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # gettext support
 . gettext.sh
@@ -7,17 +7,24 @@ export TEXTDOMAIN=lernstick_backup
 SCREENSHOT_DIRECTORY="/home/user/Screenshots"
 LOG_FILE="/var/log/lernstick_backup"
 
-# source config file
+# read config file
+# (sourcing doesn't work when properties have whitespaces)
 CONFIG_FILE="/etc/lernstickWelcome"
 if [ -f ${CONFIG_FILE} ]
 then
-	. ${CONFIG_FILE}
+	declare -A CONFIG
+	IFS="="
+	while read -r key value
+	do
+		CONFIG[${key}]="${value}"
+	done < ${CONFIG_FILE}
+	unset IFS
 else
 	echo "${CONFIG_FILE} does not (yet) exist" | tee -a ${LOG_FILE}
 	exit 0
 fi
 
-if [ "${Backup}" != "true" ]
+if [ "${CONFIG[Backup]}" != "true" ]
 then
 	echo "continuous backup is not enabled" | tee -a ${LOG_FILE}
 	exit 0
@@ -174,7 +181,7 @@ delete_old_backups()
 
 do_backup()
 {
-	if [ "${BackupScreenshot}" = "true" ]
+	if [ "${CONFIG[BackupScreenshot]}" = "true" ]
 	then
 		# make sure that the screenshots directory exists
 		if [ ! -d "${SCREENSHOT_DIRECTORY}" ]
@@ -200,14 +207,14 @@ do_backup()
                 mv /tmp/screenshot.jpg "${SCREENSHOT_DIRECTORY}/screenshot $(date +"%Y-%m-%d %H.%M.%S").jpg"
 	fi
 
-	if [ "${BackupDirectoryEnabled}" = "true" ]
+	if [ "${CONFIG[BackupDirectoryEnabled]}" = "true" ]
 	then
-		do_rdiff "${BackupSource}" "${BackupDirectory}"
+		do_rdiff "${CONFIG[BackupSource]}" "${CONFIG[BackupDirectory]}"
 	fi
 
-	if [ "${BackupPartitionEnabled}" = "true" ]
+	if [ "${CONFIG[BackupPartitionEnabled]}" = "true" ]
 	then
-		BACKUP_DEVICE="$(blkid -l -o device -t LABEL="${BackupPartition}")"
+		BACKUP_DEVICE="$(blkid -l -o device -t LABEL="${CONFIG[BackupPartition]}")"
 		if [ ${BACKUP_DEVICE} ]
 		then
 			MOUNT_POINT="$(grep ${BACKUP_DEVICE} /proc/mounts | awk '{ print $2 }')"
@@ -215,16 +222,16 @@ do_backup()
 			if [ -z "${MOUNT_POINT}" ]
 			then
 				MOUNT_DIR="/backup/"
-				MOUNT_POINT="${MOUNT_DIR}/${BackupPartition}"
+				MOUNT_POINT="${MOUNT_DIR}/${CONFIG[BackupPartition]}"
 				mkdir -p "${MOUNT_POINT}"
 				chown root.root "${MOUNT_DIR}"
 				chmod 700  "${MOUNT_DIR}"
 				echo "calling \"mount ${BACKUP_DEVICE} ${MOUNT_POINT}\"" | tee -a ${LOG_FILE}
 				mount ${BACKUP_DEVICE} "${MOUNT_POINT}"
 			fi
-			do_rdiff "${BackupSource}" "${MOUNT_POINT}/lernstick_backup"
+			do_rdiff "${CONFIG[BackupSource]}" "${MOUNT_POINT}/lernstick_backup"
 		else
-			show_error "$(eval_gettext "Backup partition<br><tt>\${BackupPartition}</tt><br>not found!")"
+			show_error "$(eval_gettext "Backup partition<br><tt>\${CONFIG[BackupPartition]}</tt><br>not found!")"
 		fi
 	fi
 }
@@ -244,7 +251,7 @@ then
 	echo "FINAL backup run at $(date -R)" | tee -a ${LOG_FILE}
 	do_backup
 else
-	TIMEOUT=$(expr ${BackupFrequency} \* 60)
+	TIMEOUT=$(expr ${CONFIG[BackupFrequency]} \* 60)
 	while true; do
 		echo "backup run at $(date -R)" | tee -a ${LOG_FILE}
 
