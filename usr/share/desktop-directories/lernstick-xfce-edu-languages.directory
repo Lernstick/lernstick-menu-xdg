@@ -1,10 +1,10 @@
 [Desktop Entry]
 Encoding=UTF-8
-Icon=/usr/share/icons/oxygen/base/128x128/categories/applications-education-language.png
+Icon=config-language
 Type=Directory
 Name=Languages
 Name[af]=Tale
-Name[ar]=لغات
+Name[ar]=اللغات
 Name[as]=ভাষা
 Name[ast]=Llingües
 Name[be]=Мовы
@@ -67,7 +67,6 @@ Name[pt]=Línguas
 Name[pt_BR]=Idiomas
 Name[ro]=Limbi
 Name[ru]=Языки
-Name[se]=Gielat
 Name[si]=භාෂා
 Name[sk]=Jazyky
 Name[sl]=Jeziki
