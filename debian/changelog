@@ -1,3 +1,16 @@
+lernstick-menu-xdg-exam (28) lernstick-9; urgency=medium
+
+  [ chaoos ]
+  * [6452d5] removed annoying sound when performing a screenshot
+
+  [ Ronny Standtke ]
+  * [0f2c8b] fixed spelling in comment
+  * [b6ca3c] huge cleanup for KDE, LXDE, MATE and Xfce
+  * [d6107c] replaced sourcing of config file (doesn't work with properties
+    that have whitespaces) with hash table
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Thu, 15 Feb 2018 22:45:25 +0100
+
 lernstick-menu-xdg-exam (27) lernstick-9; urgency=medium
 
   * [965ae9] disabled timout calculation
