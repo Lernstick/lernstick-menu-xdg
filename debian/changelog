@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (30) lernstick-9; urgency=medium
+
+  * [0efe93] fixed rules file
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 14 Mar 2018 14:08:27 +0100
+
 lernstick-menu-xdg-exam (29) lernstick-9; urgency=medium
 
   * [5604a7] enable lernstick-final-backup.service during installation
