@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (31) lernstick-9; urgency=medium
+
+  * [49fb06] fixed packaging (again...)
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 14 Mar 2018 15:32:46 +0100
+
 lernstick-menu-xdg-exam (30) lernstick-9; urgency=medium
 
   * [0efe93] fixed rules file
