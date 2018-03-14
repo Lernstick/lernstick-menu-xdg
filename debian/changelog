@@ -1,3 +1,9 @@
+lernstick-menu-xdg (26) lernstick-9; urgency=medium
+
+  * [840c52] fixed packaging
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 14 Mar 2018 15:42:46 +0100
+
 lernstick-menu-xdg (25) lernstick-9; urgency=medium
 
   * [b6ca3c] huge cleanup for KDE, LXDE, MATE and Xfce
