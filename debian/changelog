@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (29) lernstick-9; urgency=medium
+
+  * [5604a7] enable lernstick-final-backup.service during installation
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 14 Mar 2018 11:26:20 +0100
+
 lernstick-menu-xdg-exam (28) lernstick-9; urgency=medium
 
   [ chaoos ]
