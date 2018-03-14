@@ -1,6 +1,8 @@
 #!/usr/bin/make -f
 
 %:
-	dh ${@} --with=config-package
-	dh_systemd_enable --name=live-auto-upgrades live-auto-upgrades.service
-	dh_systemd_enable --name=lernstick-final-backup lernstick-final-backup.service
+	dh ${@} --with=config-package,systemd
+
+override_dh_systemd_enable:
+	dh_systemd_enable --name=live-auto-upgrades
+	dh_systemd_enable --name=lernstick-final-backup

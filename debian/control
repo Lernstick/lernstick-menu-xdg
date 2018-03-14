@@ -3,12 +3,12 @@ Section: admin
 Priority: extra
 Maintainer: Lernstick Team <lernstick.ph@fhnw.ch>
 Uploaders: Ronny Standtke <ronny.standtke@fhnw.ch>, Gaudenz Steinlin <gaudenz.steinlin@cirrax.com>
-Build-Depends: debhelper (>= 9), dh-systemd, config-package-dev
+Build-Depends: debhelper (>= 10), config-package-dev
 Standards-Version: 3.7.3
 
 Package: lernstick-menu-xdg2-exam
 Architecture: all
-Depends: menu-xdg, kde-runtime | libgtk-3-bin, gettext, xterm, xdotool, imagemagick, systemd, kde-baseapps-bin, zenity, nuvola-icon-theme
+Depends: ${misc:Depends}, menu-xdg, kde-runtime | libgtk-3-bin, gettext, xterm, xdotool, imagemagick, systemd, kde-baseapps-bin, zenity, nuvola-icon-theme
 Provides: ${diverted-files}
 Conflicts: lernstick-menu-xdg-exam, ${diverted-files}
 Breaks: lernstick-menu-xdg-exam
