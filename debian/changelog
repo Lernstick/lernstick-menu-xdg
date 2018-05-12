@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (32) lernstick-9; urgency=medium
+
+  * [79f0d5] added rdiff-backup to dependencies
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 12 May 2018 14:01:55 +0200
+
 lernstick-menu-xdg-exam (31) lernstick-9; urgency=medium
 
   * [49fb06] fixed packaging (again...)
