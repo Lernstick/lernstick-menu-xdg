@@ -1,3 +1,10 @@
+lernstick-menu-xdg-exam (33) lernstick-9; urgency=medium
+
+  * [2742db] also use ShowPasswordDialog field in /etc/lernstickWelcome to
+             detect password changes via lernstickwelcome
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 13 Oct 2018 14:53:29 +0200
+
 lernstick-menu-xdg-exam (32) lernstick-9; urgency=medium
 
   * [79f0d5] added rdiff-backup to dependencies
