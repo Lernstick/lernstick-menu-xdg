@@ -71,6 +71,34 @@ get_existing_parent()
         echo "${DIRECTORY}"
 }
 
+reformat_backup_partition()
+{
+	BACKUP_PARTITION=$(grep /exchange/partition /proc/mounts | awk '{ print $1 }')
+	echo "backup partition: $BACKUP_PARTITION" | tee -a ${LOG_FILE}
+	if umount $BACKUP_PARTITION
+	then
+		echo "unmounted backup partition before formatting" | tee -a ${LOG_FILE}
+	else
+		echo "ERROR: could not umount backup partition!" | tee -a ${LOG_FILE}
+	fi
+	LABEL="$(lsblk -no LABEL $BACKUP_PARTITION)"
+	echo "label: $LABEL" | tee -a ${LOG_FILE}
+	FSTYPE="$(lsblk -no FSTYPE $BACKUP_PARTITION)"
+	echo "fstype: $FSTYPE" | tee -a ${LOG_FILE}
+	case $FSTYPE in
+		ntfs)
+			mkfs.ntfs -f -L "$LABEL" $BACKUP_PARTITION
+			;;
+		vfat)
+			mkfs.vfat -n "$LABEL" $BACKUP_PARTITION
+			;;
+		*)
+			echo "unsupported file format!" | tee -a ${LOG_FILE}
+			;;
+	esac
+	mount $BACKUP_PARTITION /exchange/partition
+}
+
 do_rdiff()
 {
 	DESTINATION="${2}"
@@ -88,12 +116,19 @@ do_rdiff()
 		echo "backup destination device: ${DEVICE}" | tee -a ${LOG_FILE}
 		if mount | grep ^"${DEVICE}" | grep "(ro," > /dev/null
 		then
-			show_error "$(eval_gettext "The file system on the backup device (<tt>\${DEVICE}</tt>) seems to be corrupt.<br>An interactive file system repair will be started...")" "true"
-			#FS_TYPE="mount | grep ^/dev/sda2 | awk '{ print $5 }'"
-			#echo "backup destination filesystem: ${FS_TYPE}" | tee -a ${LOG_FILE}
-			FSCK_DONE_INFO="$(eval_gettext "File system check finished.\nYou can close this window now.")"
-			xterm -T "$(eval_gettext "File System Repair")" -hold -e "fsck.vfat -v -r -w ${DEVICE}; echo -e \"${FSCK_DONE_INFO}\""
-			mount -o remount,rw "${DEVICE}"
+			# The file system seems to be corrupted. Unfortunately, vfat is so fragile that this happens quite often
+			# when students just unplug the USB stick before shutdown completes.
+			# Interactive file system repairs (commented out below) turned out to be too irritating and complicated.
+			# Therefore we better reformat the exchange partition...
+			#
+			# ------ old version with interactive file system repair ------
+			# show_error "$(eval_gettext "The file system on the backup device (<tt>\${DEVICE}</tt>) seems to be corrupt.<br>An interactive file system repair will be started...")" "true"
+			# FSCK_DONE_INFO="$(eval_gettext "File system check finished.\nYou can close this window now.")"
+			# xterm -T "$(eval_gettext "File System Repair")" -hold -e "fsck.vfat -v -r -w ${DEVICE}; echo -e \"${FSCK_DONE_INFO}\""
+			# mount -o remount,rw "${DEVICE}"
+			#
+			# ------ new version with reformatting ------
+			reformat_backup_partition
 		fi
 	fi
 
@@ -138,8 +173,15 @@ do_rdiff()
 					FREE_SPACE="$(df | grep ^${DEVICE} | awk '{ print $4}')"
 					if [ "${FREE_SPACE}" = "0" ]
 					then
-						# show error message about full exchange partition
-						show_error "${ERROR_MESSAGE}<br>$(eval_gettext "There is no free space left on device <tt>\${DEVICE}</tt>!")"
+						# when a broken filesystem is mounted the free space is sometimes also shown as 0%
+						# therefore we also retry with reformatting here
+						reformat_backup_partition
+						if rdiff-backup -v5 "${1}" "${DESTINATION}" >> ${LOG_FILE} 2>&1
+						then
+							delete_old_backups "${DESTINATION}"
+						else
+							show_error "${ERROR_MESSAGE}"
+						fi
 					else
 						show_error "${ERROR_MESSAGE}"
 					fi
