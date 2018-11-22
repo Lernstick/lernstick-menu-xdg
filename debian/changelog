@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (35) lernstick-9; urgency=medium
+
+  * [413dfd] don't format exchange partition if it is user accessible
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Thu, 22 Nov 2018 10:38:03 +0100
+
 lernstick-menu-xdg-exam (34) lernstick-9; urgency=medium
 
   * [179643] reformat exchange partition as last fallback strategy
