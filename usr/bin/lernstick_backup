@@ -73,6 +73,14 @@ get_existing_parent()
 
 reformat_backup_partition()
 {
+	if [ "${CONFIG[ExchangeAccess]}" = "true" ]
+	then
+		# If the exchange partition is user accessible it could be used for much more than
+		# storing backups. Therefore formatting is not a valid fallback strategy in this case.
+		echo "exchange partition is user accessible, formatting canceled." | tee -a ${LOG_FILE}
+		return
+	fi
+
 	BACKUP_PARTITION=$(grep /exchange/partition /proc/mounts | awk '{ print $1 }')
 	echo "backup partition: $BACKUP_PARTITION" | tee -a ${LOG_FILE}
 	if umount $BACKUP_PARTITION
