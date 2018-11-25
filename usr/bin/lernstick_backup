@@ -279,7 +279,17 @@ do_backup()
 				echo "calling \"mount ${BACKUP_DEVICE} ${MOUNT_POINT}\"" | tee -a ${LOG_FILE}
 				mount ${BACKUP_DEVICE} "${MOUNT_POINT}"
 			fi
-			do_rdiff "${CONFIG[BackupSource]}" "${MOUNT_POINT}/lernstick_backup"
+			if [[ ${CONFIG[BackupDirectory]} == /exchange/partition/* ]]
+			then
+				echo "backup directory on mounted exchange partition" | tee -a ${LOG_FILE}
+				PARTITION_BACKUP_DIR="${CONFIG[BackupDirectory]/#\/exchange\/partition\//}"
+			else
+				PARTITION_BACKUP_DIR="lernstick_backup"
+			fi
+			echo "PARTITION_BACKUP_DIR=\"$PARTITION_BACKUP_DIR\"" | tee -a ${LOG_FILE}
+			do_rdiff "${CONFIG[BackupSource]}" "${MOUNT_POINT}/$PARTITION_BACKUP_DIR"
+			echo "unmounting ${BACKUP_DEVICE} so that it can be temporarily removed" | tee -a ${LOG_FILE}
+			umount ${BACKUP_DEVICE}
 		else
 			show_error "$(eval_gettext "Backup partition<br><tt>\${CONFIG[BackupPartition]}</tt><br>not found!")"
 		fi
