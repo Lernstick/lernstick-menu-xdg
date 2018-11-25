@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (37) lernstick-9; urgency=medium
+
+  * [29b7ab] some gettext fixes
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Mon, 26 Nov 2018 00:10:23 +0100
+
 lernstick-menu-xdg-exam (36) lernstick-9; urgency=medium
 
   * [d2e455] equivalent path and unmounting for partition backup
