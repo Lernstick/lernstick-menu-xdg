@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (36) lernstick-9; urgency=medium
+
+  * [d2e455] equivalent path and unmounting for partition backup
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 25 Nov 2018 23:32:45 +0100
+
 lernstick-menu-xdg-exam (35) lernstick-9; urgency=medium
 
   * [413dfd] don't format exchange partition if it is user accessible
