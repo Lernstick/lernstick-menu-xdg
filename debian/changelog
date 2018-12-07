@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (38) lernstick-9; urgency=medium
+
+  * [6df9c3] even more gettext fixes
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 07 Dec 2018 22:58:30 +0100
+
 lernstick-menu-xdg-exam (37) lernstick-9; urgency=medium
 
   * [29b7ab] some gettext fixes
