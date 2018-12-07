@@ -1,3 +1,10 @@
+lernstick-menu-xdg-exam (39) lernstick-9; urgency=medium
+
+  * [840c52] fixed packaging
+  * [11c2b4] removed keyboard selector update (moved to lernstick-config package)
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 07 Dec 2018 23:11:28 +0100
+
 lernstick-menu-xdg-exam (38) lernstick-9; urgency=medium
 
   * [6df9c3] even more gettext fixes
