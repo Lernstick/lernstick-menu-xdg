@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-28 19:08+0100\n"
+"POT-Creation-Date: 2018-11-26 00:04+0100\n"
 "PO-Revision-Date: 2013-04-24 13:41+0200\n"
 "Last-Translator: Ronny Standtke <ronny.standtke@gmx.net>\n"
 "Language-Team: DE <DE@li.org>\n"
@@ -16,37 +16,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: usr/bin/lernstick_backup:66
-#, sh-format
-msgid ""
-"The file system on the backup device (<tt>${DEVICE}</tt>) seems to be "
-"corrupt.<br>An interactive file system repair will be started..."
-msgstr ""
-"Das Dateisystem auf dem Datensicherungsgerät (<tt>${DEVICE}</tt>) scheint "
-"defekt zu sein.<br>Eine interaktive Dateisystemreparatur wird gestartet..."
-
-#: usr/bin/lernstick_backup:69
-#, sh-format
-msgid "File system check finished.\\nYou can close this window now."
-msgstr "Die Dateisystemreparatur ist beendet.\\nSie können dieses Fenster nun schließen."
-
-#: usr/bin/lernstick_backup:70
-#, sh-format
-msgid "File System Repair"
-msgstr "Dateisystemreparatur"
-
-#: usr/bin/lernstick_backup:94
+#: usr/bin/lernstick_backup:168
 #, sh-format
 msgid "Backup to<br><tt>${DESTINATION}</tt><br>failed!"
 msgstr "Datensicherung nach<br><tt>${DESTINATION}</tt><br>fehlgeschlagen!"
 
-#: usr/bin/lernstick_backup:110
+#: usr/bin/lernstick_backup:296
 #, sh-format
-msgid "There is no free space left on device <tt>${DEVICE}</tt>!"
-msgstr "Auf dem Gerät <tt>${DEVICE}</tt> ist kein freier Speicherplatz mehr!"
-
-#: usr/bin/lernstick_backup:188
-#, sh-format
-msgid "Backup partition<br><tt>${BackupPartition}</tt><br>not found!"
+msgid "Backup partition<br><tt>${BP_TMP}</tt><br>not found!"
 msgstr ""
-"Datensicherungspartition<br><tt>${BackupPartition}</tt><br>nicht gefunden!"
+"Datensicherungspartition<br><tt>${BP_TMP}</tt><br>nicht gefunden!"
+
+#~ msgid ""
+#~ "The file system on the backup device (<tt>${DEVICE}</tt>) seems to be "
+#~ "corrupt.<br>An interactive file system repair will be started..."
+#~ msgstr ""
+#~ "Das Dateisystem auf dem Datensicherungsgerät (<tt>${DEVICE}</tt>) scheint "
+#~ "defekt zu sein.<br>Eine interaktive Dateisystemreparatur wird gestartet..."
+
+#~ msgid "File system check finished.\\nYou can close this window now."
+#~ msgstr ""
+#~ "Die Dateisystemreparatur ist beendet.\\nSie können dieses Fenster nun "
+#~ "schließen."
+
+#~ msgid "File System Repair"
+#~ msgstr "Dateisystemreparatur"
+
+#~ msgid "There is no free space left on device <tt>${DEVICE}</tt>!"
+#~ msgstr ""
+#~ "Auf dem Gerät <tt>${DEVICE}</tt> ist kein freier Speicherplatz mehr!"

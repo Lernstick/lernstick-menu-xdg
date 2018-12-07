@@ -291,7 +291,8 @@ do_backup()
 			echo "unmounting ${BACKUP_DEVICE} so that it can be temporarily removed" | tee -a ${LOG_FILE}
 			umount ${BACKUP_DEVICE}
 		else
-			show_error "$(eval_gettext "Backup partition<br><tt>\${CONFIG[BackupPartition]}</tt><br>not found!")"
+			BP_TMP="${CONFIG[BackupPartition]}"
+			show_error "$(eval_gettext "Backup partition<br><tt>\${BP_TMP}</tt><br>not found!")"
 		fi
 	fi
 }
