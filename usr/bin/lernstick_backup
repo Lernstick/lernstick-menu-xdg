@@ -159,8 +159,8 @@ do_rdiff()
 		# Our first fallback strategy is to rename the old backup
 		# folder and retry with a fresh one.
 		echo "retrying after renaming broken destination folder" | tee -a ${LOG_FILE}
-		rm -rf "${DESTINATION}.broken"
-		mv "${DESTINATION}" "${DESTINATION}.broken"
+		rm -rf "${DESTINATION}.old"
+		mv "${DESTINATION}" "${DESTINATION}.old"
 		if rdiff-backup -v5 "${1}" "${DESTINATION}" >> ${LOG_FILE} 2>&1
 		then
 			delete_old_backups "${DESTINATION}"
@@ -173,7 +173,7 @@ do_rdiff()
 				echo "there is no free diskspace left" | tee -a ${LOG_FILE}
 				echo "retrying after removing all destination folders" | tee -a ${LOG_FILE}
 				rm -rf "${DESTINATION}"
-				rm -rf "${DESTINATION}.broken"
+				rm -rf "${DESTINATION}.old"
 				if rdiff-backup -v5 "${1}" "${DESTINATION}" >> ${LOG_FILE} 2>&1
 				then
 					delete_old_backups "${DESTINATION}"
