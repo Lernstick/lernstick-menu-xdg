@@ -1,3 +1,9 @@
+lernstick-menu-xdg (29) lernstick-9; urgency=medium
+
+  * [62aee0] made call to wmctrl more robust against runtime effects
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 02 Mar 2019 18:34:56 +0100
+
 lernstick-menu-xdg (28) lernstick-9; urgency=medium
 
   * [868636] add "always on top" property to info dialogs in lernstick_autostart
