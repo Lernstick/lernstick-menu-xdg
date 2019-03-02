@@ -1,3 +1,9 @@
+lernstick-menu-xdg (28) lernstick-9; urgency=medium
+
+  * [868636] add "always on top" property to info dialogs in lernstick_autostart
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 02 Mar 2019 16:47:48 +0100
+
 lernstick-menu-xdg (27) lernstick-9; urgency=medium
 
   * [11c2b4] removed keyboard selector update (moved to lernstick-config package)
