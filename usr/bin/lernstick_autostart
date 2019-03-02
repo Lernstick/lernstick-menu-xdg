@@ -10,7 +10,7 @@ show_dialog ()
 
 	# set the "always on top" property to our dialog so that it doesn't
 	# get overlooked when other windows are opened very fast after login
-	(sleep 3; wmctrl -r KDialog -b add,above) &
+	(while true; do wmctrl -r KDialog -b add,above && exit; sleep 0.3; done) &
 
 	if [ "$KDE_FULL_SESSION" ]
 	then
