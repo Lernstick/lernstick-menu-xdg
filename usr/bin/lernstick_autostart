@@ -8,6 +8,10 @@ show_dialog ()
 {
 	TEXT="${1}"
 
+	# set the "always on top" property to our dialog so that it doesn't
+	# get overlooked when other windows are opened very fast after login
+	(sleep 3; wmctrl -r KDialog -b add,above) &
+
 	if [ "$KDE_FULL_SESSION" ]
 	then
 		kdialog --msgbox "${TEXT}"

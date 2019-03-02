@@ -8,7 +8,7 @@ Standards-Version: 3.7.3
 
 Package: lernstick-menu-xdg2
 Architecture: all
-Depends: ${misc:Depends}, menu, menu-xdg, kde-runtime | libgtk-3-bin, gettext, nuvola-icon-theme
+Depends: ${misc:Depends}, menu, menu-xdg, kde-runtime | libgtk-3-bin, gettext, nuvola-icon-theme, wmctrl
 Provides: ${diverted-files}
 Conflicts: lernstick-menu-xdg, ${diverted-files}
 Breaks: lernstick-menu-xdg
