@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (41) lernstick-9; urgency=medium
+
+  * [868636] add "always on top" property to info dialogs in lernstick_autostart
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 02 Mar 2019 16:59:06 +0100
+
 lernstick-menu-xdg-exam (40) lernstick-9; urgency=medium
 
   * [ac01cb] use postfix "old" instead of "broken"
