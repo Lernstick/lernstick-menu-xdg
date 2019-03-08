@@ -1,3 +1,10 @@
+lernstick-menu-xdg-exam (43) lernstick-9; urgency=medium
+
+  * [a31f35] disabled timeout for lernstick-final-backup service
+  * [66d716] use file locking, fixed indentation
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 08 Mar 2019 23:18:04 +0100
+
 lernstick-menu-xdg-exam (42) lernstick-9; urgency=medium
 
   * [62aee0] made call to wmctrl more robust against runtime effects
