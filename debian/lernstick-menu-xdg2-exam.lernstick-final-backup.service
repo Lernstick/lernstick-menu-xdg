@@ -6,6 +6,7 @@ Type=oneshot
 RemainAfterExit=true
 ExecStart=/bin/true
 ExecStop=/usr/bin/lernstick_backup once
+TimeoutSec=infinity
 
 [Install]
 WantedBy=multi-user.target
