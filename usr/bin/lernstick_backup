@@ -63,12 +63,12 @@ show_error()
 
 get_existing_parent()
 {
-        DIRECTORY="${1}"
-        while [ ! -d ${DIRECTORY} ]
-        do
-                DIRECTORY="$(dirname "${DIRECTORY}")"
-        done
-        echo "${DIRECTORY}"
+	DIRECTORY="${1}"
+	while [ ! -d ${DIRECTORY} ]
+	do
+		DIRECTORY="$(dirname "${DIRECTORY}")"
+	done
+	echo "${DIRECTORY}"
 }
 
 reformat_backup_partition()
@@ -231,6 +231,13 @@ delete_old_backups()
 
 do_backup()
 {
+	# make sure that only one instance is running at the same time
+	echo "trying to get lock..."
+	LCK="/tmp/lernstick_backup.lck"
+	exec 8>$LCK
+	flock 8
+	echo "lock aquired"
+
 	if [ "${CONFIG[BackupScreenshot]}" = "true" ]
 	then
 		# make sure that the screenshots directory exists
@@ -240,21 +247,21 @@ do_backup()
 			chmod 700 "${SCREENSHOT_DIRECTORY}"
 		fi
 		sudo -u user import -silent -window root - | convert - \
-                  -filter Triangle \
-                  -define filter:support=2 \
-                  -unsharp 0.25x0.08+8.3+0.045 \
-                  -dither None \
-                  -posterize 136 \
-                  -quality 62 \
-                  -define jpeg:fancy-upsampling=off \
-                  -define png:compression-filter=5 \
-                  -define png:compression-level=9 \
-                  -define png:compression-strategy=1 \
-                  -define png:exclude-chunk=all \
-                  -interlace none \
-                  -colorspace sRGB \
-                  /tmp/screenshot.jpg
-                mv /tmp/screenshot.jpg "${SCREENSHOT_DIRECTORY}/screenshot $(date +"%Y-%m-%d %H.%M.%S").jpg"
+			-filter Triangle \
+			-define filter:support=2 \
+			-unsharp 0.25x0.08+8.3+0.045 \
+			-dither None \
+			-posterize 136 \
+			-quality 62 \
+			-define jpeg:fancy-upsampling=off \
+			-define png:compression-filter=5 \
+			-define png:compression-level=9 \
+			-define png:compression-strategy=1 \
+			-define png:exclude-chunk=all \
+			-interlace none \
+			-colorspace sRGB \
+			/tmp/screenshot.jpg
+		mv /tmp/screenshot.jpg "${SCREENSHOT_DIRECTORY}/screenshot $(date +"%Y-%m-%d %H.%M.%S").jpg"
 	fi
 
 	if [ "${CONFIG[BackupDirectoryEnabled]}" = "true" ]
@@ -295,6 +302,9 @@ do_backup()
 			show_error "$(eval_gettext "Backup partition<br><tt>\${BP_TMP}</tt><br>not found!")"
 		fi
 	fi
+
+	flock -u 8
+	echo "unlocked"
 }
 
 # add newline if logfile is not empty
