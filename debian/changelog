@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (44) lernstick-9; urgency=medium
+
+  * [1923cf] store screenshots in backup source directory
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Mon, 29 Apr 2019 13:57:26 +0200
+
 lernstick-menu-xdg-exam (43) lernstick-9; urgency=medium
 
   * [a31f35] disabled timeout for lernstick-final-backup service
