@@ -4,7 +4,6 @@
 . gettext.sh
 export TEXTDOMAIN=lernstick_backup
 
-SCREENSHOT_DIRECTORY="/home/user/Screenshots"
 LOG_FILE="/var/log/lernstick_backup"
 
 # read config file
@@ -23,6 +22,8 @@ else
 	echo "${CONFIG_FILE} does not (yet) exist" | tee -a ${LOG_FILE}
 	exit 0
 fi
+
+SCREENSHOT_DIRECTORY="${CONFIG[BackupSource]}/Screenshots"
 
 if [ "${CONFIG[Backup]}" != "true" ]
 then
