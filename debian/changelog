@@ -1,3 +1,9 @@
+lernstick-menu-xdg (30) lernstick-10; urgency=medium
+
+  * [dd2d4f] adapted KDE desktop directories to Debian 10
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 10 Aug 2019 20:22:15 +0200
+
 lernstick-menu-xdg (29) lernstick-9; urgency=medium
 
   * [62aee0] made call to wmctrl more robust against runtime effects
