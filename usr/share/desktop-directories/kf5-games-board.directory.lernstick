@@ -1,11 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Directory
 Name=Board Games
 Name[af]=Bord Speletjies
 Name[ar]=ألعاب الألواح
 Name[as]=বোৰ্ড খেলা
-Name[ast]=Xuegos de tableru
 Name[be]=Настольныя гульні
 Name[be@latin]=Nastolnyja hulni
 Name[bg]=Игри на дъска
@@ -91,5 +89,5 @@ Name[wa]=Djeus d' platea
 Name[x-test]=xxBoard Gamesxx
 Name[zh_CN]=棋类游戏
 Name[zh_TW]=棋盤遊戲
-Icon=/usr/share/icons/nuvola/128x128/categories/applications-games-board.png
+Icon=/usr/share/icons/matefaenza/apps/96/gnome-tali.png
 X-KDE-SuppressGenericNames=Game,Board Game

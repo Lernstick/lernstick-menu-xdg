@@ -6,9 +6,9 @@ Uploaders: Ronny Standtke <ronny.standtke@fhnw.ch>, Gaudenz Steinlin <gaudenz.st
 Build-Depends: debhelper (>= 9), config-package-dev
 Standards-Version: 3.7.3
 
-Package: lernstick-menu-xdg2
+Package: lernstick-menu-xdg
 Architecture: all
-Depends: ${misc:Depends}, menu, menu-xdg, kde-runtime | libgtk-3-bin, gettext, nuvola-icon-theme, wmctrl
+Depends: ${misc:Depends}, menu, menu-xdg, kde-runtime | libgtk-3-bin, gettext, mate-icon-theme-faenza, wmctrl
 Provides: ${diverted-files}
 Conflicts: lernstick-menu-xdg, ${diverted-files}
 Breaks: lernstick-menu-xdg
