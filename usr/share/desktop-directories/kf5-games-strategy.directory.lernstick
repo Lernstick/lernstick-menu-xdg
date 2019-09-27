@@ -1,11 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Directory
 Name=Tactics & Strategy
 Name[af]=Strategie & Taktiek
 Name[ar]=التكتيكات والاستراتيجيات
 Name[as]=Tactics & Strategy
-Name[ast]=Táutica y estratexa
 Name[be]=Тактыка і стратэгія
 Name[be@latin]=Taktyka j stratehija
 Name[bg]=Стратегически игри
@@ -91,4 +89,4 @@ Name[xh]=Amacebo okufumana iinjongo & Amacebo okuzoba
 Name[x-test]=xxTactics & Strategyxx
 Name[zh_CN]=策略游戏
 Name[zh_TW]=戰略及策略
-Icon=/usr/share/icons/nuvola/128x128/categories/applications-games-strategy.png
+Icon=gnome-chess

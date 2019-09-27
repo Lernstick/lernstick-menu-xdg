@@ -1,11 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Directory
 Name=Card Games
 Name[af]=Kaart Speletjies
 Name[ar]=ألعاب الورق
 Name[as]=তাছ খেলা
-Name[ast]=Xuegos de cartes
 Name[be]=Картавыя гульні
 Name[be@latin]=Hulni ŭ karty
 Name[bg]=Игри с карти
@@ -92,5 +90,5 @@ Name[wa]=Cwårdjeus
 Name[x-test]=xxCard Gamesxx
 Name[zh_CN]=牌类游戏
 Name[zh_TW]=紙牌遊戲
-Icon=/usr/share/icons/oxygen/base/128x128/categories/applications-games.png
+Icon=/usr/share/icons/matefaenza/categories/96/applications-cardgames.png
 X-KDE-SuppressGenericNames=Game,Card Game

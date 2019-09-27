@@ -1,0 +1,10 @@
+[Unit]
+Description=disables auto upgrades if no persistent media is found
+Before=packagekit.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/live-auto-upgrades
+
+[Install]
+WantedBy=packagekit.service

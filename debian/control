@@ -8,7 +8,20 @@ Standards-Version: 3.7.3
 
 Package: lernstick-menu-xdg-exam
 Architecture: all
-Depends: ${misc:Depends}, menu-xdg, kde-runtime | libgtk-3-bin, gettext, xterm, xdotool, imagemagick, systemd, kde-baseapps-bin, zenity, nuvola-icon-theme, rdiff-backup, wmctrl
+Depends: ${misc:Depends},
+	gettext,
+	imagemagick,
+	kdialog,
+	kde-runtime | libgtk-3-bin,
+	mate-icon-theme-faenza,
+	menu,
+	menu-xdg,
+	rdiff-backup,
+	systemd,
+	wmctrl,
+	xdotool,
+	xterm,
+	zenity
 Provides: ${diverted-files}
 Conflicts: lernstick-menu-xdg-exam, ${diverted-files}
 Breaks: lernstick-menu-xdg-exam
