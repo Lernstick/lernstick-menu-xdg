@@ -1,3 +1,11 @@
+lernstick-menu-xdg-exam (47) lernstick-10; urgency=medium
+
+  * [dd2d4f] adapted KDE desktop directories to Debian 10
+  * [f6ff1b] updated .gitignore
+  * [4ab60c] updated .gitignore file
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 27 Sep 2019 14:51:40 +0200
+
 lernstick-menu-xdg-exam (46) lernstick-10; urgency=medium
 
   * [514123] use original package name
