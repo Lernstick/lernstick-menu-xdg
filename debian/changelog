@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (48) lernstick-10; urgency=medium
+
+  * [e176c7] fixed naming of maintainer scripts
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 27 Sep 2019 20:57:58 +0200
+
 lernstick-menu-xdg-exam (47) lernstick-10; urgency=medium
 
   * [dd2d4f] adapted KDE desktop directories to Debian 10
