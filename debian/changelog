@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (46) lernstick-10; urgency=medium
+
+  * [514123] use original package name
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 27 Sep 2019 14:11:53 +0200
+
 lernstick-menu-xdg-exam (45) lernstick-9; urgency=medium
 
   * [b105f1] use hidden folder for screenshots
