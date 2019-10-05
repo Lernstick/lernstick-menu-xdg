@@ -5,4 +5,7 @@ debian/debhelper-build-stamp
 debian/files
 debian/lernstick-menu-xdg-exam/
 debian/lernstick-menu-xdg-exam.debhelper.log
+debian/lernstick-menu-xdg-exam.postinst.debhelper
+debian/lernstick-menu-xdg-exam.postrm.debhelper
+debian/lernstick-menu-xdg-exam.prerm.debhelper
 debian/lernstick-menu-xdg-exam.substvars
