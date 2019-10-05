@@ -1,3 +1,11 @@
+lernstick-menu-xdg-exam (49) lernstick-10; urgency=medium
+
+  * [29c2f6] updated .gitignore file
+  * [f16684] use better lock screen background for Debian 10
+  * [d000bb] updated dependencies
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 05 Oct 2019 15:29:25 +0200
+
 lernstick-menu-xdg-exam (48) lernstick-10; urgency=medium
 
   * [e176c7] fixed naming of maintainer scripts
