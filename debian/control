@@ -8,11 +8,25 @@ Standards-Version: 3.7.3
 
 Package: lernstick-menu-xdg-exam
 Architecture: all
+# Dependencies explained:
+# - gettext:
+#	for i18n in some shellscripts
+# - imagemagick:
+#	We use "convert" for creating screenshots in /usr/bin/lernstick_backup
+#	and for creating the lock screen in /usr/bin/detect_virtualization.
+# - gnome-backgrounds:
+#	We use the file /usr/share/backgrounds/gnome/Wood.jpg for creating the
+#	lock screen in /usr/bin/detect_virtualization.
+# - rdiff-backup:
+#	used in /usr/bin/lernstick_backup.
+# - xdotool:
+#	used for making our lock screen visible in /usr/bin/detect_virtualization
 Depends: ${misc:Depends},
 	gettext,
+	gnome-backgrounds,
 	imagemagick,
-	kdialog,
 	kde-runtime | libgtk-3-bin,
+	kdialog,
 	mate-icon-theme-faenza,
 	menu,
 	menu-xdg,
