@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (52) lernstick-10; urgency=medium
+
+  * [697558] closed "window of opportunity" for aspiring exam hackers
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 06 Oct 2019 00:47:52 +0200
+
 lernstick-menu-xdg-exam (51) lernstick-10; urgency=medium
 
   * [e0b313] added workaround for detect_virtualization because of another Debian 10 bug:
