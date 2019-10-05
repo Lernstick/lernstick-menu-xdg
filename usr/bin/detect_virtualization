@@ -35,8 +35,14 @@ convert /usr/share/backgrounds/gnome/Wood.jpg \
 
 dconf write /org/gnome/desktop/screensaver/picture-uri "'file://${TMP_FILE}'"
 dconf write /org/gnome/desktop/screensaver/picture-options "'stretched'"
+
+# In Debian 10 XDG autostart applications are started too early, see:
+# https://blogs.gnome.org/benzea/2019/10/01/gnome-3-34-is-now-managed-using-systemd/#comment-14161
+# Therefore we have to sleep for some seconds to work around the bug above.
+sleep 5
 dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
 
+# virtual hammering the F2 key to work around the following bug:
 # https://bugzilla.gnome.org/show_bug.cgi?id=710904
 for i in 1 2 3 4 5
 do
