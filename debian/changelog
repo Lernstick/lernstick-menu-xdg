@@ -1,3 +1,10 @@
+lernstick-menu-xdg-exam (51) lernstick-10; urgency=medium
+
+  * [e0b313] added workaround for detect_virtualization because of another Debian 10 bug:
+             https://blogs.gnome.org/benzea/2019/10/01/gnome-3-34-is-now-managed-using-systemd/#comment-14161
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 06 Oct 2019 00:05:27 +0200
+
 lernstick-menu-xdg-exam (50) lernstick-10; urgency=medium
 
   * [045aa2] improved logging and code cleanup in usr/bin/detect_virtualization
