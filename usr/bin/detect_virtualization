@@ -18,7 +18,7 @@ if [ "${VIRTUALIZATION}" != "none" ]
 then
 	TMP_FILE="/tmp/virtualization_lock.jpg"
 
-        convert /usr/share/backgrounds/gnome/Fabric.jpg \
+        convert /usr/share/backgrounds/gnome/Wood.jpg \
                 -background black \
                 -fill white \
                 -pointsize 90 \
