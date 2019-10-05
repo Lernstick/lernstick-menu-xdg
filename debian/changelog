@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (50) lernstick-10; urgency=medium
+
+  * [045aa2] improved logging and code cleanup in usr/bin/detect_virtualization
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 05 Oct 2019 22:49:20 +0200
+
 lernstick-menu-xdg-exam (49) lernstick-10; urgency=medium
 
   * [29c2f6] updated .gitignore file
