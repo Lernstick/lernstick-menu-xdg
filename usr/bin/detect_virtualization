@@ -38,7 +38,14 @@ dconf write /org/gnome/desktop/screensaver/picture-options "'stretched'"
 
 # In Debian 10 XDG autostart applications are started too early, see:
 # https://blogs.gnome.org/benzea/2019/10/01/gnome-3-34-is-now-managed-using-systemd/#comment-14161
-# Therefore we have to use the following tight loop to close any "window of opportunity" for aspiring exam hackers.
+# Therefore we have to use the following tight loops to close any "window of opportunity" for aspiring exam hackers.
+
+# At first we have to wait until dbus is actually up and running and responding. Otherwise the second loop will just exit with the following error message:
+# "Error org.freedesktop.DBus.Error.NoReply: Message recipient disconnected from message bus without replying"
+while ! $(dbus-send --session --print-reply=literal --type=method_call --dest='org.gnome.ScreenSaver' '/org/gnome/ScreenSaver' org.gnome.ScreenSaver.GetActive >/dev/null 2>&1)
+do
+	sleep 0.1
+done
 while $(dbus-send --session --print-reply=literal --type=method_call --dest='org.gnome.ScreenSaver' '/org/gnome/ScreenSaver' org.gnome.ScreenSaver.GetActive | grep -q false)
 do
 	dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
