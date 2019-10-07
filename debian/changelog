@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (53) lernstick-10; urgency=medium
+
+  * [f63e41] wait in detect_virtualization until dbus is actually up and running and responding
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Mon, 07 Oct 2019 20:13:31 +0200
+
 lernstick-menu-xdg-exam (52) lernstick-10; urgency=medium
 
   * [697558] closed "window of opportunity" for aspiring exam hackers
