@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (54) lernstick-10; urgency=medium
+
+  * [41e351] improved logging
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 11 Oct 2019 01:10:12 +0200
+
 lernstick-menu-xdg-exam (53) lernstick-10; urgency=medium
 
   * [f63e41] wait in detect_virtualization until dbus is actually up and running and responding
