@@ -42,13 +42,18 @@ dconf write /org/gnome/desktop/screensaver/picture-options "'stretched'"
 
 # At first we have to wait until dbus is actually up and running and responding. Otherwise the second loop will just exit with the following error message:
 # "Error org.freedesktop.DBus.Error.NoReply: Message recipient disconnected from message bus without replying"
+echo "trying out if dbus is already usable..."
 while ! $(dbus-send --session --print-reply=literal --type=method_call --dest='org.gnome.ScreenSaver' '/org/gnome/ScreenSaver' org.gnome.ScreenSaver.GetActive >/dev/null 2>&1)
 do
-	sleep 0.1
+	echo "waiting for dbus to initialize..."
+	sleep 1
 done
+echo "starting screen lock loop..."
 while $(dbus-send --session --print-reply=literal --type=method_call --dest='org.gnome.ScreenSaver' '/org/gnome/ScreenSaver' org.gnome.ScreenSaver.GetActive | grep -q false)
 do
+	echo "trying to lock screen via dbus-send"
 	dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
+	sleep 1
 done
 
 # virtual hammering the F2 key to work around the following bug:
