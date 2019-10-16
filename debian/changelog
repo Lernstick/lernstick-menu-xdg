@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (55) lernstick-10; urgency=medium
+
+  * [fbf2b0] added another safeguard against dbus errors when trying to lock screen
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 16 Oct 2019 18:21:43 +0200
+
 lernstick-menu-xdg-exam (54) lernstick-10; urgency=medium
 
   * [41e351] improved logging
