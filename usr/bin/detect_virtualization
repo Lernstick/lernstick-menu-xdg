@@ -20,7 +20,7 @@ then
         exit 0
 fi
 
-echo "Virtualization \"${VIRTUALIZATION}\" detected. Locking screen..."
+echo "Virtualization \"${VIRTUALIZATION}\" detected."
 
 TMP_FILE="/tmp/virtualization_lock.jpg"
 convert /usr/share/backgrounds/gnome/Wood.jpg \
@@ -38,27 +38,33 @@ dconf write /org/gnome/desktop/screensaver/picture-options "'stretched'"
 
 # In Debian 10 XDG autostart applications are started too early, see:
 # https://blogs.gnome.org/benzea/2019/10/01/gnome-3-34-is-now-managed-using-systemd/#comment-14161
-# Therefore we have to use the following tight loops to close any "window of opportunity" for aspiring exam hackers.
-
-# At first we have to wait until dbus is actually up and running and responding. Otherwise the second loop will just exit with the following error message:
-# "Error org.freedesktop.DBus.Error.NoReply: Message recipient disconnected from message bus without replying"
-echo "trying out if dbus is already usable..."
-while ! $(dbus-send --session --print-reply=literal --type=method_call --dest='org.gnome.ScreenSaver' '/org/gnome/ScreenSaver' org.gnome.ScreenSaver.GetActive >/dev/null 2>&1)
-do
-	echo "waiting for dbus to initialize..."
-	sleep 1
-done
-echo "starting screen lock loop..."
-while $(dbus-send --session --print-reply=literal --type=method_call --dest='org.gnome.ScreenSaver' '/org/gnome/ScreenSaver' org.gnome.ScreenSaver.GetActive | grep -q false)
-do
-	echo "trying to lock screen via dbus-send"
-	dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock || true
-	sleep 1
-done
+# Therefore we have to use the following tight loop to close any "window of opportunity" for aspiring exam hackers.
+while
+	echo "Trying to lock screen..."
+	dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
+	sleep 0.5
+	echo "Checking if screen is now locked..."
+	DBUS_REPLY="$(dbus-send --session --print-reply=literal --type=method_call --dest='org.gnome.ScreenSaver' '/org/gnome/ScreenSaver' org.gnome.ScreenSaver.GetActive)"
+	if [ $? -eq 0 ]
+	then
+		echo "Checking screensaver via dbus-send run without errors (reply was \"$DBUS_REPLY\")."
+		if echo $DBUS_REPLY | grep -q true
+		then
+			echo "The screen is now locked."
+			break
+		else
+			echo "The screen is not locked yet..."
+			continue
+		fi
+	else
+		echo "Checking screensaver via dbus-send failed..."
+		continue
+	fi
+do :; done
 
 # virtual hammering the F2 key to work around the following bug:
 # https://bugzilla.gnome.org/show_bug.cgi?id=710904
-for i in 1 2 3 4 5
+for i in 1 2 3
 do
 	xdotool key F2
 	sleep 1
