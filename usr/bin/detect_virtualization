@@ -39,6 +39,10 @@ dconf write /org/gnome/desktop/screensaver/picture-options "'stretched'"
 # In Debian 10 XDG autostart applications are started too early, see:
 # https://blogs.gnome.org/benzea/2019/10/01/gnome-3-34-is-now-managed-using-systemd/#comment-14161
 # Therefore we have to use the following tight loop to close any "window of opportunity" for aspiring exam hackers.
+
+# Unfortunately, we have to wait a little bit. Otherwise we just crash GNOME...
+sleep 3
+
 while
 	echo "Trying to lock screen..."
 	dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
