@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (57) lernstick-10; urgency=medium
+
+  * [1eb371] added another safety wait in detect_virtualization
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Thu, 17 Oct 2019 23:12:33 +0200
+
 lernstick-menu-xdg-exam (56) lernstick-10; urgency=medium
 
   * [0134e8] improved screen locking code once more
