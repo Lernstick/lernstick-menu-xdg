@@ -1,3 +1,11 @@
+lernstick-menu-xdg-exam (58) lernstick-10; urgency=medium
+
+  * [0ee506] make sure that at shutdown/reboot the final backup completes
+             before the network is shut down (which in turn would hang the
+             backup service and shutdown/reboot)
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 05 Feb 2020 19:00:33 +0100
+
 lernstick-menu-xdg-exam (57) lernstick-10; urgency=medium
 
   * [1eb371] added another safety wait in detect_virtualization
