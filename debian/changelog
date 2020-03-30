@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (60) lernstick-10; urgency=medium
+
+  * [7f49c1] renamed sudoers file to fix order of configs
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Mon, 30 Mar 2020 23:57:23 +0200
+
 lernstick-menu-xdg-exam (59) lernstick-10; urgency=medium
 
   * [0cc37e] added sudoers customization
