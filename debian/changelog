@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (59) lernstick-10; urgency=medium
+
+  * [0cc37e] added sudoers customization
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Mon, 30 Mar 2020 22:21:19 +0200
+
 lernstick-menu-xdg-exam (58) lernstick-10; urgency=medium
 
   * [0ee506] make sure that at shutdown/reboot the final backup completes
