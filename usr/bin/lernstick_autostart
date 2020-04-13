@@ -10,22 +10,26 @@ show_dialog ()
 
 	# set the "always on top" property to our dialog so that it doesn't
 	# get overlooked when other windows are opened very fast after login
-	(while true; do wmctrl -r KDialog -b add,above && exit; sleep 0.3; done) &
+	if [ "$KDE_FULL_SESSION" ]
+	then
+		DIALOG_WM_CLASS="kdialog"
+	else
+		DIALOG_WM_CLASS="zenity"
+	fi
+	(while true; do wmctrl -x -r $DIALOG_WM_CLASS -b add,above && exit; sleep 0.3; done) &
 
 	if [ "$KDE_FULL_SESSION" ]
 	then
 		kdialog --msgbox "${TEXT}"
 	else
-		# zenity's HTML interpreter is so dumb, it doesn't even understand <br>...
-		# we need to replace it with "\\n"
-		#ZENITY_TEXT="$(echo ${TEXT} | sed 's/<br>/\\n/g')"
-		#echo "ZENITY_TEXT=\"${ZENITY_TEXT}\""
-		#zenity --info --text "${ZENITY_TEXT}"
-
-		# the layout of the zenity dialog is so broken that we have to use kdialog in GNOME
-		# (was broken in Debian 7, fixed in Debian 8, broken again in Debian 9)
-		kdialog --msgbox "${TEXT}"
+		# zenity doesn't understand HTML but Pango Markup Language, see:
+		# https://developer.gnome.org/pygtk/stable/pango-markup-language.html
+		# Therefore we need to replace "<br>" with "\\n".
+		ZENITY_TEXT="${TEXT//<br>/\\n}"
+		echo "ZENITY_TEXT=\"${ZENITY_TEXT}\""
+		zenity --no-wrap --info --text "${ZENITY_TEXT}"
 	fi
+
 }
 
 run_desktop_file()
@@ -38,7 +42,7 @@ run_desktop_file()
 		then
 			kioclient exec "${DESKTOP_FILE}"
 		else
-			BASE_NAME="$(basename ${DESKTOP_FILE})"
+			BASE_NAME="$(basename "${DESKTOP_FILE}")"
 			SHORT_NAME="${BASE_NAME%.desktop}"
 			gtk-launch "${SHORT_NAME}"
 		fi
@@ -81,10 +85,7 @@ then
 
 	if [ -n "${START}" ]
 	then
-		# call pkexec directly as gtk-launch in run_desktop_file fails with "Refusing to render service to dead parents."
-		# TODO: revert when gtk-launch is fixed
-		# run_desktop_file "/usr/share/applications/ch-fhnw-lernstickwelcome-welcome.desktop"
-		pkexec lernstickWelcome
+		run_desktop_file /usr/share/applications/ch.fhnw.lernstickwelcome.controller.welcomeapplication.desktop
 	fi
 
 elif echo "${COW}" | grep -q "ro,"
@@ -131,10 +132,7 @@ else
 		if grep -q "AutoStartInstaller=true" ${CONFIG_FILE}
 		then
 			echo "persistency disabled -> try starting dlcopy..."
-			# call pkexec directly as gtk-launch in run_desktop_file fails with "Refusing to render service to dead parents."
-			# TODO: revert when gtk-launch is fixed
-			# run_desktop_file "/usr/share/applications/ch-fhnw-dlcopy-dlcopy.desktop"
-			dlcopy.user
+			run_desktop_file /usr/share/applications/ch-fhnw-dlcopy-dlcopy.desktop
 		else
 			echo "installer autostart not configured in config file"
 		fi
