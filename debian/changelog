@@ -1,3 +1,9 @@
+lernstick-menu-xdg (31) lernstick-10; urgency=medium
+
+  * [2cab7d] use zenity and run_desktop_file (both have been fixed in Debian 10)
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Mon, 13 Apr 2020 15:22:44 +0200
+
 lernstick-menu-xdg (30) lernstick-10; urgency=medium
 
   * [dd2d4f] adapted KDE desktop directories to Debian 10
