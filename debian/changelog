@@ -1,3 +1,11 @@
+lernstick-menu-xdg-exam (61) lernstick-10; urgency=medium
+
+  * [2cab7d] use zenity and run_desktop_file (both have been fixed in Debian 10)
+  * [bb9aff] updated Debian control file
+  * [253bed] updated Debian control file
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Mon, 13 Apr 2020 17:50:34 +0200
+
 lernstick-menu-xdg-exam (60) lernstick-10; urgency=medium
 
   * [7f49c1] renamed sudoers file to fix order of configs
