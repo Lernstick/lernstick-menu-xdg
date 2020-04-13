@@ -8,14 +8,39 @@ Standards-Version: 3.7.3
 Package: lernstick-menu-xdg
 Architecture: all
 # Dependencies explained:
-# - gettext-base: used for i18n
-# - kde-runtime: we use kioclient to start desktop files in KDE Plasma
-# - libglib2.0-bin: we call gsettings to disable software upgrades
-# - libgtk-3-bin: we use gtk-launch to start desktop files in all DEs besides KDE Plasma
-# - mate-icon-theme-faenza: we use icons from this package in kf5-games-board.directory and kf5-games-card.directory
-# - menu-xdg: we are diverting /etc/xdg/menus/debian-menu.menu to disable the fscking Debian menu
-# - wmctrl: used to keep our dialogs on top of other windows
-Depends: ${misc:Depends}, gettext-base, kde-runtime | libgtk-3-bin, libglib2.0-bin, mate-icon-theme-faenza, menu-xdg, wmctrl
+# - gettext-base:
+#       for i18n in some shellscripts
+# - kde-runtime:
+#       We use kioclient to start desktop files in KDE Plasma.
+# - libgtk-3-bin:
+#       We use gtk-launch to start desktop files in all DEs besides KDE Plasma.
+# - kdialog:
+#       We use kdialog to show our dialogs in KDE Plasma.
+# - zenity:
+#       We use zenity to show our dialogs in all desktop environments exept KDE Plasma.
+# - libglib2.0-bin:
+#       We call gsettings to disable software upgrades when the data partition is not writable.
+# - mate-icon-theme-faenza:
+#       We use icons from this package in kf5-games-board.directory and kf5-games-card.directory.
+# - menu-xdg:
+#       We are diverting /etc/xdg/menus/debian-menu.menu to disable the fscking Debian menu.
+# - wmctrl:
+#       used to keep our dialogs on top of other windows
+#
+# Note: Because we can't group the dependencies with parentheses we have to declare
+# (kde-runtime & kdialog) | (libgtk-3-bin & zenity)
+# in this very verbose way.
+# Boolean algebra tells us that (A & B) | (C & D) = (A|C) & (A|D) & (B|C) & (B|D)
+Depends: ${misc:Depends},
+        gettext-base,
+        kde-runtime | libgtk-3-bin,
+        kde-runtime | zenity,
+        kdialog | libgtk-3-bin,
+        kdialog | zenity,
+        libglib2.0-bin,
+        mate-icon-theme-faenza,
+        menu-xdg,
+        wmctrl
 Provides: ${diverted-files}
 Conflicts: ${diverted-files}
 Description: Removes the Debian menu from the start menu
