@@ -1,44 +1,59 @@
 Source: lernstick-menu-xdg-exam
 Section: admin
 Priority: extra
-Maintainer: Lernstick Team <lernstick.ph@fhnw.ch>
-Uploaders: Ronny Standtke <ronny.standtke@fhnw.ch>, Gaudenz Steinlin <gaudenz.steinlin@cirrax.com>
+Maintainer: Ronny Standtke <ronny.standtke@gmx.net>
 Build-Depends: debhelper (>= 10), config-package-dev
 Standards-Version: 3.7.3
 
 Package: lernstick-menu-xdg-exam
 Architecture: all
 # Dependencies explained:
-# - gettext:
+# - gettext-base:
 #	for i18n in some shellscripts
-# - imagemagick:
-#	We use "convert" for creating screenshots in /usr/bin/lernstick_backup
-#	and for creating the lock screen in /usr/bin/detect_virtualization.
 # - gnome-backgrounds:
 #	We use the file /usr/share/backgrounds/gnome/Wood.jpg for creating the
 #	lock screen in /usr/bin/detect_virtualization.
+# - imagemagick:
+#	We use "convert" for creating screenshots in /usr/bin/lernstick_backup
+#	and for creating the lock screen in /usr/bin/detect_virtualization.
+# - kde-runtime:
+#	We use kioclient to start desktop files in KDE Plasma.
+# - libgtk-3-bin:
+#	We use gtk-launch to start desktop files in all DEs besides KDE Plasma.
+# - libglib2.0-bin:
+#	We call gsettings to disable software upgrades.
+# - kdialog:
+#	We use kdialog to show our dialogs in KDE Plasma.
+# - mate-icon-theme-faenza:
+#	We use icons from this package in kf5-games-board.directory and kf5-games-card.directory.
+# - menu-xdg:
+#	We are diverting /etc/xdg/menus/debian-menu.menu to disable the fscking Debian menu.
 # - rdiff-backup:
 #	used in /usr/bin/lernstick_backup.
+# - systemd:
+#	We use systemd-detect-virt in /usr/bin/detect_virtualization.
 # - xdotool:
 #	used for making our lock screen visible in /usr/bin/detect_virtualization
+# - wmctrl:
+#	used to keep our dialogs on top of other windows
+# - zenity:
+#	We use zenity to show our dialogs in all DEs exept KDE Plasma.
 Depends: ${misc:Depends},
-	gettext,
+	gettext-base,
 	gnome-backgrounds,
 	imagemagick,
 	kde-runtime | libgtk-3-bin,
 	kdialog,
+	libglib2.0-bin,
 	mate-icon-theme-faenza,
-	menu,
 	menu-xdg,
 	rdiff-backup,
 	systemd,
 	wmctrl,
 	xdotool,
-	xterm,
 	zenity
 Provides: ${diverted-files}
-Conflicts: lernstick-menu-xdg-exam, ${diverted-files}
-Breaks: lernstick-menu-xdg-exam
+Conflicts: ${diverted-files}
 Description: Removes the Debian menu from the start menu
  The Debian menu is one of the worst ideas in Debian. Who on earth thinks
  that a second main level menu structure is something users understand?
