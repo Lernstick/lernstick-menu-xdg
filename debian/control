@@ -20,10 +20,12 @@ Architecture: all
 #	We use kioclient to start desktop files in KDE Plasma.
 # - libgtk-3-bin:
 #	We use gtk-launch to start desktop files in all DEs besides KDE Plasma.
-# - libglib2.0-bin:
-#	We call gsettings to disable software upgrades.
 # - kdialog:
 #	We use kdialog to show our dialogs in KDE Plasma.
+# - zenity:
+#	We use zenity to show our dialogs in all DEs exept KDE Plasma.
+# - libglib2.0-bin:
+#	We call gsettings to disable software upgrades.
 # - mate-icon-theme-faenza:
 #	We use icons from this package in kf5-games-board.directory and kf5-games-card.directory.
 # - menu-xdg:
@@ -36,22 +38,26 @@ Architecture: all
 #	used for making our lock screen visible in /usr/bin/detect_virtualization
 # - wmctrl:
 #	used to keep our dialogs on top of other windows
-# - zenity:
-#	We use zenity to show our dialogs in all DEs exept KDE Plasma.
+#
+# Note: Because we can't group the dependencies with parentheses we have to declare
+# (kde-runtime & kdialog) | (libgtk-3-bin & zenity)
+# in this very verbose way.
+# Boolean algebra tells us that (A & B) | (C & D) = (A|C) & (A|D) & (B|C) & (B|D)
 Depends: ${misc:Depends},
 	gettext-base,
 	gnome-backgrounds,
 	imagemagick,
 	kde-runtime | libgtk-3-bin,
-	kdialog,
+	kde-runtime | zenity,
+	kdialog | libgtk-3-bin,
+	kdialog | zenity,
 	libglib2.0-bin,
 	mate-icon-theme-faenza,
 	menu-xdg,
 	rdiff-backup,
 	systemd,
 	wmctrl,
-	xdotool,
-	zenity
+	xdotool
 Provides: ${diverted-files}
 Conflicts: ${diverted-files}
 Description: Removes the Debian menu from the start menu
