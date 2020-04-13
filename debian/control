@@ -1,17 +1,23 @@
 Source: lernstick-menu-xdg
 Section: admin
 Priority: extra
-Maintainer: Lernstick Team <lernstick.ph@fhnw.ch>
-Uploaders: Ronny Standtke <ronny.standtke@fhnw.ch>, Gaudenz Steinlin <gaudenz.steinlin@cirrax.com>
+Maintainer: Ronny Standtke <ronny.standtke@gmx.net>
 Build-Depends: debhelper (>= 9), config-package-dev
 Standards-Version: 3.7.3
 
 Package: lernstick-menu-xdg
 Architecture: all
-Depends: ${misc:Depends}, menu, menu-xdg, kde-runtime | libgtk-3-bin, gettext, mate-icon-theme-faenza, wmctrl
+# Dependencies explained:
+# - gettext-base: used for i18n
+# - kde-runtime: we use kioclient to start desktop files in KDE Plasma
+# - libglib2.0-bin: we call gsettings to disable software upgrades
+# - libgtk-3-bin: we use gtk-launch to start desktop files in all DEs besides KDE Plasma
+# - mate-icon-theme-faenza: we use icons from this package in kf5-games-board.directory and kf5-games-card.directory
+# - menu-xdg: we are diverting /etc/xdg/menus/debian-menu.menu to disable the fscking Debian menu
+# - wmctrl: used to keep our dialogs on top of other windows
+Depends: ${misc:Depends}, gettext-base, kde-runtime | libgtk-3-bin, libglib2.0-bin, mate-icon-theme-faenza, menu-xdg, wmctrl
 Provides: ${diverted-files}
-Conflicts: lernstick-menu-xdg, ${diverted-files}
-Breaks: lernstick-menu-xdg
+Conflicts: ${diverted-files}
 Description: Removes the Debian menu from the start menu
  The Debian menu is one of the worst ideas in Debian. Who on earth thinks
  that a second main level menu structure is something users understand?
