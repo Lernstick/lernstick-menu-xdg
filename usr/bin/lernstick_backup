@@ -247,7 +247,7 @@ do_backup()
 			mkdir -p "${SCREENSHOT_DIRECTORY}"
 			chmod 700 "${SCREENSHOT_DIRECTORY}"
 		fi
-		sudo -u user import -silent -window root - | convert - \
+		sudo -u user import -silent -window root jpg:- | convert - \
 			-filter Triangle \
 			-define filter:support=2 \
 			-unsharp 0.25x0.08+8.3+0.045 \
