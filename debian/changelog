@@ -1,3 +1,12 @@
+lernstick-menu-xdg-exam (62) lernstick-10; urgency=medium
+
+  [ chaoos ]
+  * [02456a] jog as output format, else the image format is ps (postscript) and
+             imagemagick fails with permission denied.
+             (See https://stackoverflow.com/a/59193253/2768341)
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 23 Sep 2020 19:52:24 +0200
+
 lernstick-menu-xdg-exam (61) lernstick-10; urgency=medium
 
   * [2cab7d] use zenity and run_desktop_file (both have been fixed in Debian 10)
