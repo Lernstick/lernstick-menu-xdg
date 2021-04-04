@@ -1,3 +1,9 @@
+lernstick-menu-xdg (34) lernstick-11; urgency=medium
+
+  * [54805e] updated to Debian 11
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 04 Apr 2021 16:56:23 +0200
+
 lernstick-menu-xdg (33) lernstick-10; urgency=medium
 
   * [253bed] updated Debian control file
