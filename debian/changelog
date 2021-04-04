@@ -1,3 +1,9 @@
+lernstick-menu-xdg (35) lernstick-11; urgency=medium
+
+  * [8f35f2] improved icon for lernstick-edu-music.directory
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 04 Apr 2021 19:46:49 +0200
+
 lernstick-menu-xdg (34) lernstick-11; urgency=medium
 
   * [54805e] updated to Debian 11
