@@ -20,8 +20,6 @@ Architecture: all
 #       We use zenity to show our dialogs in all desktop environments exept KDE Plasma.
 # - libglib2.0-bin:
 #       We call gsettings to disable software upgrades when the data partition is not writable.
-# - mate-icon-theme-faenza:
-#       We use icons from this package in kf5-games-board.directory and kf5-games-card.directory.
 # - menu-xdg:
 #       We are diverting /etc/xdg/menus/debian-menu.menu to disable the fscking Debian menu.
 # - wmctrl:
@@ -38,7 +36,6 @@ Depends: ${misc:Depends},
         kdialog | libgtk-3-bin,
         kdialog | zenity,
         libglib2.0-bin,
-        mate-icon-theme-faenza,
         menu-xdg,
         wmctrl
 Provides: ${diverted-files}
