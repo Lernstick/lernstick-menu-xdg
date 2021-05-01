@@ -40,7 +40,7 @@ run_desktop_file()
 	then
 		if [ "$KDE_FULL_SESSION" ]
 		then
-			kioclient exec "${DESKTOP_FILE}"
+			kioclient5 exec "${DESKTOP_FILE}"
 		else
 			BASE_NAME="$(basename "${DESKTOP_FILE}")"
 			SHORT_NAME="${BASE_NAME%.desktop}"
