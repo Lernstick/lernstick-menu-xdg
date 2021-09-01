@@ -8,4 +8,5 @@ COW=$(grep /lib/live/mount/persistence /proc/mounts | grep -v ^tmpfs | grep -v ^
 if [ -z "${COW}" ] || echo "${COW}" | grep -q "ro,"
 then
         sed -i 's/"1"/"0"/' /etc/apt/apt.conf.d/20auto-upgrades
+	sed -i 's/APT::Periodic::Download-Upgradeable-Packages "1"/APT::Periodic::Download-Upgradeable-Packages "0"/' /etc/apt/apt.conf.d/51lernstick
 fi
