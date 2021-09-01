@@ -1,3 +1,11 @@
+lernstick-menu-xdg-exam (63) lernstick-11; urgency=medium
+
+  * [54805e] updated to Debian 11
+  * [8f35f2] improved icon for lernstick-edu-music.directory
+  * [9e7d08] fixed lernstick_autostart for KDE Plasma in Debian 11
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Wed, 01 Sep 2021 11:08:27 +0200
+
 lernstick-menu-xdg-exam (62) lernstick-10; urgency=medium
 
   [ chaoos ]
