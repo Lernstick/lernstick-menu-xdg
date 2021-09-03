@@ -66,10 +66,16 @@ while
 	fi
 do :; done
 
+# As of Debian 11 we have enabled the GNOME extension "unblank", see:
+# https://extensions.gnome.org/extension/1414/unblank/
+#
+# Up to Debian 10 we needed the following workaround, kept here for easy reference:
+#
 # virtual hammering the F2 key to work around the following bug:
 # https://bugzilla.gnome.org/show_bug.cgi?id=710904
-for i in 1 2 3
-do
-	xdotool key F2
-	sleep 1
-done
+#
+# for i in 1 2 3
+# do
+#	xdotool key F2
+#	sleep 1
+# done

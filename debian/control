@@ -32,8 +32,6 @@ Architecture: all
 #	used in /usr/bin/lernstick_backup.
 # - systemd:
 #	We use systemd-detect-virt in /usr/bin/detect_virtualization.
-# - xdotool:
-#	used for making our lock screen visible in /usr/bin/detect_virtualization
 # - wmctrl:
 #	used to keep our dialogs on top of other windows
 #
@@ -53,8 +51,7 @@ Depends: ${misc:Depends},
 	menu-xdg,
 	rdiff-backup,
 	systemd,
-	wmctrl,
-	xdotool
+	wmctrl
 Provides: ${diverted-files}
 Conflicts: ${diverted-files}
 Description: Removes the Debian menu from the start menu
