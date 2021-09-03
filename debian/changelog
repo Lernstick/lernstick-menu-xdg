@@ -1,3 +1,10 @@
+lernstick-menu-xdg-exam (64) lernstick-11; urgency=medium
+
+  * [20b120] replaced workaround for making the lock screen visible after
+             detecting virtualization with GNOME extension "unblank".
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 03 Sep 2021 18:08:21 +0200
+
 lernstick-menu-xdg-exam (63) lernstick-11; urgency=medium
 
   * [54805e] updated to Debian 11
