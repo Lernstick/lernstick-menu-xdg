@@ -24,17 +24,14 @@ echo "Virtualization \"${VIRTUALIZATION}\" detected."
 
 TMP_FILE="/tmp/virtualization_lock.jpg"
 convert /usr/share/backgrounds/gnome/Wood.jpg \
-	-background black \
-	-fill white \
-	-pointsize 90 \
-	-gravity South \
-	-splice 0x220 \
-	-annotate +0+20 "$(eval_gettext "Virtualization (\${VIRTUALIZATION}) detected\nLogin required")" \
-	-append \
+	-fill red \
+	-pointsize 200 \
+	-gravity North \
+	-annotate +0+800 "$(eval_gettext "Virtualization (\${VIRTUALIZATION}) detected\nLogin required")" \
 	"${TMP_FILE}"
 
-dconf write /org/gnome/desktop/screensaver/picture-uri "'file://${TMP_FILE}'"
-dconf write /org/gnome/desktop/screensaver/picture-options "'stretched'"
+dconf write /org/gnome/shell/extensions/unlock-dialog-background/switch true
+dconf write /org/gnome/shell/extensions/unlock-dialog-background/picture-uri "'${TMP_FILE}'"
 
 # In Debian 10 XDG autostart applications are started too early, see:
 # https://blogs.gnome.org/benzea/2019/10/01/gnome-3-34-is-now-managed-using-systemd/#comment-14161
@@ -79,3 +76,25 @@ do :; done
 #	xdotool key F2
 #	sleep 1
 # done
+
+while
+	sleep 0.5
+	echo "Checking if screen is now unlocked..."
+	DBUS_REPLY="$(dbus-send --session --print-reply=literal --type=method_call --dest='org.gnome.ScreenSaver' '/org/gnome/ScreenSaver' org.gnome.ScreenSaver.GetActive)"
+	if [ $? -eq 0 ]
+	then
+		echo "Checking screensaver via dbus-send run without errors (reply was \"$DBUS_REPLY\")."
+		if echo $DBUS_REPLY | grep -q true
+		then
+			echo "The screen is still locked."
+			continue
+		else
+			echo "The screen was unlocked..."
+			dconf write /org/gnome/shell/extensions/unlock-dialog-background/switch false
+			break
+		fi
+	else
+		echo "Checking screensaver via dbus-send failed..."
+		continue
+	fi
+do :; done
