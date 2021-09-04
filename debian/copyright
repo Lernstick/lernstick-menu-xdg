@@ -5,15 +5,132 @@ Upstream Author:
     Ronny Standtke <ronny.standtke@fhnw.ch>
 
 Copyright:
-
     Copyright (C) 2009 Ronny Standtke <ronny.standtke@fhnw.ch>
 
 License:
-
     GPL
 
 The Debian packaging is (C) 2009, Ronny Standtke <ronny.standtke@fhnw.ch> and
 is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
 
-# Please also look if there are files or directories which have a
-# different copyright/license attached and list them here.
+Files: usr/share/backgrounds/lock.png
+free resolution version of https://www.photohdx.com/pic-900/metal-door-with-gold-security-lock-background
+usage of this image is covered in chapter 1.1.h of the Licensing, Terms and Conditions (see below):
+
+https://www.photohdx.com/Terms:
+Licensing, Terms and Conditions
+Photohdx.com offers stock photographs/images (hereafter: Photos) on its website www.photohdx.com The use of the Photos is subject to the below terms and conditions. Using photohdx.com constitutes acceptance of these terms and conditions.
+
+1. Licensing and Use of Photos
+
+You are allowed to use our Photos for many kinds of projects and even sell them in combination with 3D models. However, you are not allowed to resell or give away our Photos as stock photos, texture packs, materials, clipart or any other product that competes with our website.
+
+1.1 You are permitted to:
+
+      a. use the Photos royalty-free for your commercial work as long as it does not violate any of our therms.
+      b. use Photos in 2D or 3D computer graphics, website design, advertising banners, movies, television shows and printed media;
+      c. incorporate the Photos in computer games and 3D models;
+      d. sell 3D models bundled with modified versions of the Photos (with the exception of HDR Panoramas), but only if you add the following text to the documentation accompanying the model: "One or more textures on this 3D model have been created with photos from Photohdx.com. These photographs may not be redistributed by default; please visit www.photohdx.com for more information."
+      e. for scrapbooking work, but only if you are the end-user of the work. Resale of the Photos as scrapbooking packs, scrapbooking papers, templates, etc, is explicitly forbidden (even when the Photos are modified).
+      f. commercial use of Photos with people from which their faces can be recognized can be used only if you buy the image from photohdx.com.
+      g. use of the free resolution images on your blog without purchasing the images, a link back to photohdx.com is welcome, but not required.
+      h. use of the free resolution images as royalty-free for your commercial work (except the images which contain people with recognizable faces).
+
+
+1.2 You are not permitted to:
+
+      a. sell or distribute any Photos (modified or not) by themselves or in a texture pack, material, shader, scale modelling papers (pre-printed or digital), scrapbooking pack;
+      b. use Photos in graphic design themes or templates sold to multiple customers on digital marketplaces (this includes stock photography, clipart, templates for websites, business cards and e-cards);
+      c. sell or redistribute the HDR Panoramas (by itself or bundled with a 3D scene);
+      d. use the Photos for creating products sold via 'print on demand' websites (for example print on demand mugs, T-shirts, mouse mats, etc);
+      e. sell or distribute skins for laptops, phones and other devices created with Photos from Photohdx.com;
+      f. bundle Photos with software such as paint programs, plugins, 3D engines, 3D programs or photo-kiosk software;
+      g. release the Photos or derivative products with Photos under Open Source Licences.
+      h. use Photos in Second Life or any other Linden Lab product or service;
+      i. use Photos for any purpose that violates US, EU or other applicable law or regulation.
+      j. use Photos displayed for Editorial Use Only for commercial work.
+
+
+2. Stockpiling the free Photos from Photohdx.com
+
+Photohdx.com is designed to be a website from which you download only the Photos you need for the project you are working on right now. It is not permitted to download whole categories (to make a local image library) or try to download all Photos with an automated program with the exception of purchased Photos or image packs.
+2.1 You are not permitted to:
+
+      a. stockpile Photos with the goal of making a local (copy of the) Image library with the exception of purchased Photos or image packs;
+      b. use a program (spider, leecher) or script to automatically download all or a large number of Photos from photohdx.com.
+      c. interfere with the security or otherwise abuse, disrupt, place excessive loads on, or attempt to gain unauthorised access to the Photohdx.com website or any system resources or networks connected to this website.
+
+3. Availability and Maintenance
+
+We do our best to make sure our website is always online, but there can be times when the website is not available because of maintenance or network problems.
+      3.1 Photohdx.com uses its best endeavours to make the service available at all times, but makes no guarantees about uninterrupted availability. Photohdx.com actively maintains the website and Image service. Maintenance can take place at any time, even if this may negatively impact the availability of the service. Maintenance is announced in advance whenever possible.
+      3.2 Photohdx.com may adapt the website and Image service from time to time. Your feedback and suggestions are welcome, but ultimately photohdx.com decides which adaptations to carry out (or not).
+
+4. Privacy
+
+We do not share your personal information with anyone, except when strictly needed (for example when you make a purchase on our website). The same is true for email: we only send you an email for account activation or when you forget your password. If we ever want to send a newsletter, we will ask for your permission first. Please see our privacy statement for more information.
+      4.1 Photohdx.com respects your privacy and personal data. We do not disclose your personal data. No newsletters or offers will be sent to you without your prior consent. Any information submitted by you will be used solely for the purpose of completing the transaction, delivering the Photo service and addressing customer service issues. In our privacy statement, we will explain which personal data we collect and for which purposes.
+
+5. Intellectual Property Rights
+
+The Photos you download are only licensed to you; you do not become the owner of the Photos. Also, while we own copyright to all the photos/Photos on our website, in rare cases an image may show a logo, brand name or copyrighted design. Be careful with these types of Photos, because the owner of the logo, brand or design might not like it when it's used in your work.
+
+      5.1 All intellectual property rights to all Photos and all content on the website www.photohdx.com belong solely to Photohdx.com or its licensors. You will only be given a right of use that is non-exclusive and non-transferable and the competencies explicitly granted under these terms and conditions or otherwise.
+
+      5.2 Some Photos contain man-made graphic materials such as wallpaper patterns, logos, brand names or signs. The use of these types of Photos is at your own discretion. The rights for the image lie with photohdx.com and the photo/image has been taken in a public space, but using the patterns, logos or name in your work may not be permitted.
+
+6. Liability and Indemnification
+If something bad happens because you use our photos or because our website fails, we are not liable for any damages. If you do something really bad with the photos (for example, the unlikely event that you commit a crime using the Photos), and that results in getting us sued, you agree to help defend us.
+      6.1 In no event shall photohdx.com be liable for indirect damages, consequential damages, lost profits, missed savings or damages through business interruption, loss of business information, loss of data, or any other pecuniary loss in connection with any claim, damage or other proceeding arising under this agreement, including - without limitation - your use of, reliance upon, access to the photohdx.com website, the Photos or any part thereof, or any rights granted to you hereunder, even if you have been advised of the possibility of such damages, whether the action is based on contract, tort (including negligence), infringement of intellectual property rights or otherwise.
+      6.2 In case of force majeure photohdx.com is never required to compensate for damages suffered by you. Force majeure includes, among other things, disruption or unavailability of the internet, telecommunications infrastructure, power interruptions, riots, traffic jams, strikes, company disruptions, interruptions in supply, fires and floods.
+      6.3 You indemnify photohdx.com against all claims arising out of or in connection with this agreement and the use of Photos.
+
+7. Term and Termination
+
+As soon as you download a photo these terms and conditions become active. You can close your account whenever you want. If you break the rules, we may close your account.
+      7.1 These terms and conditions come into force as soon as you first use the Photo service or buy Photos or Image packs from photohdx.com. The agreement remains in effect until your account is terminated.
+      7.2 You can terminate your account at any time.
+      7.3 Photohdx.com is entitled to temporarily block your account or terminate your Premium Access in the event of a breach of these terms and conditions.
+      7.4 Photohdx.com is not liable for any damage you may suffer by the termination of the account or Premium Access in accordance with Article 7.3
+
+8. Effect of Termination
+
+When you close your account, you can continue to use the photos you downloaded before the account was closed (as long as the use does not breach these terms and conditions)
+
+      8.1 Upon expiration, cancellation or termination of Premium Access, you no longer have the benefits related to Premium Access.
+      8.2 Upon expiration, cancellation, termination of an account (hereafter: “End of the account”), you can no longer download any Photos.
+      8.3 Upon the end of a subscription and/or an account, the unused credits will expire. You do not get a refund for the unused credits.
+      8.4 Upon the end of a subscription and/or an account:
+      a. you are entitled to continue to exploit any Photos already incorporated into any product prior to the End of the account;
+      b. you are entitled to continue to exploit any Photos that were already downloaded and modified prior to the End of the account;
+      c. you are entitled to continue to distribute all products into which the Photos were already incorporated prior to the End of the account;
+      d. end users are entitled to continue to use any of your products with the Photos incorporated;
+      e. the use of the Photos (in your products) must be in compliance with these licensing terms and conditions.
+
+9. Non-Competition
+
+It's not permitted to use our photos to create competing products or services. This means you are not allowed to sell or give away our photos as stock photos, textures, texture packs, clipart, shaders, material packs (even when you modify the photos!).
+
+      9.1 You will not use Photos to develop or sell products or services that are comparable to the Photo service or the platform belonging to photohdx.com.
+      9.2 In the event of a breach of the provision of Article 9.1, you will owe photohdx.com an immediately due and payable penalty of EUR 10,000.00 per established breach without further notice of default being required, and will further owe photohdx.com an immediately due and payable penalty of EUR 500.00 for each day that the breach continues, without prejudice to the right to demand full compensation.
+
+10. Changes to Terms
+
+Photohdx.com may change these terms and conditions as well as any prices at any time. If you do not accept the changes then you can close your account.
+
+      10.1 Photohdx.com may change these terms and conditions as well as any prices at any time.
+      10.2 Photohdx.com shall announce changes or additions through the service or on the website.
+      10.3 If you do not want to accept a change or addition, you can terminate the agreement when the changes take effect. Use of Photohdx.com after the date of effect shall constitute your acceptance of the changed or added-to terms and conditions.
+
+11. Final Clauses
+
+We are located in EU, Romania; any legal disputes with us will have to be handled in Timisoara under Romanian Law.
+
+      11.1 Romanian and EU law applies to this agreement.
+      11.2 Except to the extent determined otherwise by mandatory applicable law all disputes arising in connection with the Photo service shall be brought before the competent Romanian court based in Timisoara.
+      11.3 For any clause in these terms and conditions which demands that a statement must be made "in writing" to be legally valid, a statement by e-mail or communication through the Photohdx.com service shall be sufficient provided the authenticity of the sender can be established with sufficient certainty and the integrity of the statement has not been compromised.
+      11.4 The version of any communication of information as recorded by Photohdx.com shall be deemed to be authentic, unless you supply proof to the contrary.
+      11.5 In case any part of these terms and conditions are declared legally invalid, this shall not affect the validity of the whole of the agreement. The parties shall in such an event agree on one or more replacement provisions that approximate the original intent of the invalid provision(s) within the limits of the law.
+      11.6 Photohdx.com is entitled to transfer its rights and obligations under this agreement to a third party as part of an acquisition of Photohdx.com or the associated business activities.
+
+Updated: 2018, 04 June

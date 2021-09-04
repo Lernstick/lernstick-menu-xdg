@@ -22,12 +22,12 @@ fi
 
 echo "Virtualization \"${VIRTUALIZATION}\" detected."
 
-TMP_FILE="/tmp/virtualization_lock.jpg"
-convert /usr/share/backgrounds/gnome/Wood.jpg \
+TMP_FILE="/tmp/virtualization_lock.png"
+convert /usr/share/backgrounds/lock.png \
 	-fill red \
-	-pointsize 200 \
+	-pointsize 60 \
 	-gravity North \
-	-annotate +0+800 "$(eval_gettext "Virtualization (\${VIRTUALIZATION}) detected\nLogin required")" \
+	-annotate +0+150 "$(eval_gettext "Virtualization (\${VIRTUALIZATION}) detected\nLogin required")" \
 	"${TMP_FILE}"
 
 dconf write /org/gnome/shell/extensions/unlock-dialog-background/switch true
