@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (65) lernstick-11; urgency=medium
+
+  * [74a275] updated virtualization detection for Debian 11
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 04 Sep 2021 14:56:01 +0200
+
 lernstick-menu-xdg-exam (64) lernstick-11; urgency=medium
 
   * [20b120] replaced workaround for making the lock screen visible after
