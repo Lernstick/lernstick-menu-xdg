@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (66) lernstick-11; urgency=medium
+
+  * [be0f33] use custom virtualization detection lock background
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 04 Sep 2021 21:15:06 +0200
+
 lernstick-menu-xdg-exam (65) lernstick-11; urgency=medium
 
   * [74a275] updated virtualization detection for Debian 11
