@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (67) lernstick-11; urgency=medium
+
+  * [8be345] ask user for permission before removing backups
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 20 Nov 2021 00:52:56 +0100
+
 lernstick-menu-xdg-exam (66) lernstick-11; urgency=medium
 
   * [be0f33] use custom virtualization detection lock background
