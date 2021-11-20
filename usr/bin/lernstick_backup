@@ -176,7 +176,7 @@ fallback_reformat()
 	FREE_SPACE="$(df | grep ^"$DEVICE" | awk '{ print $4}')"
 	if [ "$FREE_SPACE" = "0" ]
 	then
-		if sudo -u user zenity --question --no-wrap --text "$(gettext "The file system on the backup destination device ($DEVICE) seems to be corrupted.\n<b>Should the backup destination device be reformattet?</b>\n<span foreground=\"red\">(This will delete previous backups from the destination device.)</span>")" --ok-label "$(gettext "Reformat device")"
+		if sudo -u user zenity --question --no-wrap --text "$(eval_gettext "The file system on the backup destination device (\$DEVICE) seems to be corrupted.\n<b>Should the backup destination device be reformattet?</b>\n<span foreground=\"red\">(This will delete previous backups from the destination device.)</span>")" --ok-label "$(gettext "Reformat device")"
 		then
 			reformat_backup_partition
 			if ! backup_and_cleanup "$1" "$2"
@@ -227,7 +227,7 @@ do_rdiff()
 			# mount -o remount,rw "${DEVICE}"
 			#
 			# ------ new version with reformatting ------
-			if sudo -u user zenity --question --no-wrap --text "$(gettext "The file system on the backup destination device ($DEVICE) seems to be corrupted.\n<b>Should the backup destination device be reformattet?</b>\n<span foreground=\"red\">(This will delete previous backups from the destination device.)</span>")" --ok-label "$(gettext "Reformat device")"
+			if sudo -u user zenity --question --no-wrap --text "$(eval_gettext "The file system on the backup destination device (\$DEVICE) seems to be corrupted.\n<b>Should the backup destination device be reformattet?</b>\n<span foreground=\"red\">(This will delete previous backups from the destination device.)</span>")" --ok-label "$(gettext "Reformat device")"
 			then
 				reformat_backup_partition
 			else

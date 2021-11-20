@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-20 00:45+0100\n"
+"POT-Creation-Date: 2021-11-20 10:30+0100\n"
 "PO-Revision-Date: 2013-04-24 13:41+0200\n"
 "Last-Translator: Ronny Standtke <ronny.standtke@gmx.net>\n"
 "Language-Team: DE <DE@li.org>\n"
@@ -22,11 +22,25 @@ msgid ""
 "directories be removed to free up storage space?</b>"
 msgstr ""
 "Das Speichermedium für die Datensicherung ist voll.\\n<b>Sollen existierende "
-"Datensicherungsverzeichnisse gelöscht werden, um Speicherplatz freizugeben?</b>"
+"Datensicherungsverzeichnisse\\ngelöscht werden, um Speicherplatz freizugeben?</"
+"b>"
 
 #: usr/bin/lernstick_backup:154
 msgid "Remove backup directories"
 msgstr "Datensicherungsverzeichnisse löschen"
+
+#: usr/bin/lernstick_backup:179 usr/bin/lernstick_backup:230
+#, sh-format
+msgid ""
+"The file system on the backup destination device ($DEVICE) seems to be "
+"corrupted.\\n<b>Should the backup destination device be reformattet?</b>"
+"\\n<span foreground=\"red\">(This will delete previous backups from the "
+"destination device.)</span>"
+msgstr ""
+"Das Dateisystem des Datensicherungsgeräts ($DEVICE) scheint defekt zu sein.\\n"
+"<b>Soll das Datensicherungsgerät neu formatiert werden?</b>\\n"
+"<span foreground=\"red\">(Bestehende Datensicherungen werden dabei gelöscht.)"
+"</span>"
 
 #: usr/bin/lernstick_backup:179 usr/bin/lernstick_backup:230
 msgid "Reformat device"
