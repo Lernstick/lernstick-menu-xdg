@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (68) lernstick-11; urgency=medium
+
+  * [c2e9f5] fixed gettext issue
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 20 Nov 2021 10:47:41 +0100
+
 lernstick-menu-xdg-exam (67) lernstick-11; urgency=medium
 
   * [8be345] ask user for permission before removing backups
