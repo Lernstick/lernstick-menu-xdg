@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (69) lernstick-11; urgency=medium
+
+  * [911c94] maximize screen brightness via xdg autostart
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 12 Dec 2021 18:56:23 +0100
+
 lernstick-menu-xdg-exam (68) lernstick-11; urgency=medium
 
   * [c2e9f5] fixed gettext issue
