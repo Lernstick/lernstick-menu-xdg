@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Some students use the Lernstick EXAM environment only once on their hardware, e.g. during a final exam.
+# That means that there is no opportunity for them to customize things like screen brightness.
+# On some hardware the default screen brightness is much too dark.
+# Therefore we try here to set the screen brightness to 100 % automatically.
+
+gdbus_call_brightness()
+{
+	echo "trying to set the screen brightness to 100 % via a gdbus call..."
+	gdbus call \
+		--session \
+		--dest org.gnome.SettingsDaemon.Power \
+		--object-path /org/gnome/SettingsDaemon/Power \
+		--method org.freedesktop.DBus.Properties.Set org.gnome.SettingsDaemon.Power.Screen Brightness "<int32 100>" \
+		>/dev/null 2>&1
+}
+
+while true
+do
+	if gdbus_call_brightness
+	then
+		echo "succeeded, exiting."
+		exit 0
+	else
+		echo "failed, trying again..."
+		sleep 1
+	fi
+done

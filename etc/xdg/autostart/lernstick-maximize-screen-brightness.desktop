@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Version=1.0
+Name=Maximize screen brightness
+Name[de_DE]=Bildschirmhelligkeit maximieren
+Exec=maximize-screen-brightness
+OnlyShowIn=GNOME
+X-GNOME-Autostart-enabled=true
