@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (70) lernstick-11; urgency=medium
+
+  * [311044] disable lock screen if no virtualization was detected
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Mon, 27 Mar 2023 10:16:45 +0200
+
 lernstick-menu-xdg-exam (69) lernstick-11; urgency=medium
 
   * [911c94] maximize screen brightness via xdg autostart
