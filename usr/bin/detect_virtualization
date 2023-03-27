@@ -16,7 +16,8 @@ export TEXTDOMAIN=detect_virtualization
 VIRTUALIZATION="$(systemd-detect-virt)"
 if [ "${VIRTUALIZATION}" = "none" ]
 then
-	echo "No virtualization detected."
+	echo "No virtualization detected, disabling lock screen..."
+	gsettings set org.gnome.desktop.lockdown disable-lock-screen true
         exit 0
 fi
 
