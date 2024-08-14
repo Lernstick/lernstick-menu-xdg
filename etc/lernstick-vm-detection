@@ -1,0 +1,5 @@
+# Configures how the VM detection should behave. We support following modes:
+#   - auto: (default) based if Lernstick Exam and password prompt is configured in lernstickWelcome
+#   - on: always check
+#   - off: never check
+VM_DETECTION_MODE="auto"

@@ -1,24 +1,57 @@
 #!/bin/sh
 
-if [ ! -e /etc/polkit-1/localauthority/50-local.d/10-welcome.pkla ] &&
-   [ ! -e /etc/polkit-1/localauthority/55-lernstick-exam.d/10-welcome_strict.pkla ] &&
-   ! grep -q ShowPasswordDialog=false /etc/lernstickWelcome
+if [ ! -e /etc/lernstick-vm-detection ]
 then
-        # as long as the user didn't set a password we allow everything...
-	echo "The user didn't set a passwort yet. Exiting..."
-        exit 0
+	echo "config not found falling back on auto mode"
+	VM_DETECTION_MODE="auto"
+else
+	. /etc/lernstick-vm-detection
 fi
+
+case "${VM_DETECTION_MODE}" in
+	off)
+		echo "VM detection is turned off"
+		exit 0
+		;;
+	auto)
+		if [ ! -e /etc/polkit-1/localauthority/50-local.d/10-welcome.pkla ] &&
+		   [ ! -e /etc/polkit-1/localauthority/55-lernstick-exam.d/10-welcome_strict.pkla ] &&
+		   ! grep -q ShowPasswordDialog=false /etc/lernstickWelcome
+		then
+			# as long as the user didn't set a password we allow everything...
+			echo "The user didn't set a passwort yet. Exiting..."
+			exit 0
+		fi
+		;;
+	on)
+		;;
+	*)
+		echo "config set to invalid value: ${VM_DETECTION_MODE}. Enabling VM detection"
+		;;
+esac
+
 
 # gettext support
 . gettext.sh
 export TEXTDOMAIN=detect_virtualization
 
 VIRTUALIZATION="$(systemd-detect-virt)"
-if [ "${VIRTUALIZATION}" = "none" ]
+VIRT_WHAT="$(sudo /sbin/virt-what)"
+VIRT_WHAT_STATUS=$?
+
+if [ "${VIRTUALIZATION}" = "none" ] && [ "${VIRT_WHAT_STATUS}" = "0"  ] && [ "${VIRT_WHAT}" = ""  ]
 then
 	echo "No virtualization detected, disabling lock screen..."
 	gsettings set org.gnome.desktop.lockdown disable-lock-screen true
         exit 0
+fi
+if [ "${VIRT_WHAT_STATUS}" != "0"  ]
+then
+	VIRT_WHAT="failed"
+fi
+if [ "${VIRTUALIZATION}" = "" ]
+then
+	VIRTUALIZATION="${VIRT_WHAT}"
 fi
 
 echo "Virtualization \"${VIRTUALIZATION}\" detected."
