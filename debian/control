@@ -34,7 +34,9 @@ Architecture: all
 #	We use systemd-detect-virt in /usr/bin/detect_virtualization.
 # - wmctrl:
 #	used to keep our dialogs on top of other windows
-#
+# - virt-what:
+#   We use virt-what in /usr/bin/detect_virtualization.
+# 
 # Note: Because we can't group the dependencies with parentheses we have to declare
 # (kde-runtime & kdialog) | (libgtk-3-bin & zenity)
 # in this very verbose way.
@@ -51,6 +53,7 @@ Depends: ${misc:Depends},
 	menu-xdg,
 	rdiff-backup,
 	systemd,
+	virt-what,
 	wmctrl
 Provides: ${diverted-files}
 Conflicts: ${diverted-files}
