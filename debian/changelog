@@ -1,3 +1,10 @@
+lernstick-menu-xdg-exam (71) lernstick-12; urgency=medium
+
+  [ Thore Sommer ]
+  * [bb7178] add virt-what to virtualization detection and add config
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Thu, 15 Aug 2024 22:27:21 +0200
+
 lernstick-menu-xdg-exam (70) lernstick-11; urgency=medium
 
   * [311044] disable lock screen if no virtualization was detected
