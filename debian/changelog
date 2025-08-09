@@ -1,3 +1,9 @@
+lernstick-menu-xdg (37) lernstick-12; urgency=medium
+
+  * [434722] updated COW detection
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 10 Aug 2025 00:43:40 +0200
+
 lernstick-menu-xdg (36) lernstick-11; urgency=medium
 
   * [9e7d08] fixed lernstick_autostart for KDE Plasma in Debian 11
