@@ -1,3 +1,9 @@
+lernstick-menu-xdg-exam (72) lernstick-12; urgency=medium
+
+  * [434722] updated COW detection
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sun, 10 Aug 2025 00:48:06 +0200
+
 lernstick-menu-xdg-exam (71) lernstick-12; urgency=medium
 
   [ Thore Sommer ]
