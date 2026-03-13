@@ -1,3 +1,9 @@
+lernstick-menu-xdg (40) lernstick-13; urgency=medium
+
+  * updated xfce menu for Debian 13
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 13 Mar 2026 12:27:29 +0100
+
 lernstick-menu-xdg (39) lernstick-13; urgency=medium
 
   * updated mate system menu for Debian 13
