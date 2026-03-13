@@ -1,3 +1,9 @@
+lernstick-menu-xdg (38) lernstick-13; urgency=medium
+
+  * updated mate menu for Debian 13
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Fri, 13 Mar 2026 12:11:23 +0100
+
 lernstick-menu-xdg (37) lernstick-12; urgency=medium
 
   * [434722] updated COW detection
