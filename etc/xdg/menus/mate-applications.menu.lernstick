@@ -351,7 +351,10 @@
     <Include>
       <And>
         <Category>System</Category>
-        <Not><Category>Settings</Category></Not>
+        <Not>
+          <Category>Settings</Category>
+          <Category>PackageManager</Category>
+        </Not>
       </And>
     </Include>
   </Menu>   <!-- End System Tools -->
