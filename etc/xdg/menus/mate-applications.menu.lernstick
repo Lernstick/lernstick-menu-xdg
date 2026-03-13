@@ -93,8 +93,10 @@
         <And>
           <Category>Education</Category>
           <Not>
+            <Category>Geography</Category>
             <Category>Languages</Category>
             <Category>Math</Category>
+            <Category>Music</Category>
             <Category>Science</Category>
             <Category>Teaching</Category>
             <Category>X-KDE-Edu-Teaching</Category>
