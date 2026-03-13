@@ -5,7 +5,6 @@
 	<Name>Applications</Name>
 	<Directory>kde-main.directory</Directory>
 	<!-- Search the default locations -->
-	<KDELegacyDirs/>
 	<DefaultAppDirs/>
 	<DefaultDirectoryDirs/>
 	<DefaultLayout>
@@ -135,6 +134,7 @@
 					<Not>
 						<Category>Languages</Category>
 						<Category>Math</Category>
+						<Category>Music</Category>
 						<Category>Science</Category>
 						<Category>Teaching</Category>
 						<Category>X-KDE-Edu-Teaching</Category>
@@ -158,10 +158,7 @@
 			<Include>
 				<And>
 					<Category>Education</Category>
-					<Or>
-						<Category>Teaching</Category>
-						<Category>X-KDE-Edu-Teaching</Category>
-					</Or>
+					<Category>Teaching</Category>
 				</And>
 			</Include>
 		</Menu>
@@ -294,13 +291,6 @@
 				</Not>
 			</And>
 		</Include>
-		<Menu>
-			<Name>Toys</Name>
-			<Directory>kf5-toys.directory</Directory>
-			<Include>
-				<Category>Amusement</Category>
-			</Include>
-		</Menu>
 	</Menu>
 	<Menu>
 		<Name>Graphics</Name>
@@ -399,16 +389,10 @@
 		</Menu>
 	</Menu>
 	<Menu>
-		<Name>Settingsmenu</Name>
-		<Directory>kf5-settingsmenu.directory</Directory>
-		<Include>
-			<Category>Settings</Category>
-		</Include>
-	</Menu>
-	<Menu>
 		<Name>System</Name>
 		<Directory>kf5-system.directory</Directory>
 		<Include>
+			<Category>Settings</Category>
 			<And>
 				<Category>System</Category>
 				<Not><Category>X-KDE-More</Category></Not>
@@ -493,12 +477,13 @@
 			</Include>
 		</Menu>
 	</Menu>
-	<Include>
-		<And>
-			<Category>KDE</Category>
-			<Category>Core</Category>
-		</And>
-	</Include>
+	<Menu>
+		<Name>Help</Name>
+		<Directory>kf5-help.directory</Directory>
+		<Include>
+			<Category>Documentation</Category>
+		</Include>
+	</Menu>
 	<DefaultMergeDirs/>
 	<MergeFile>applications-kmenuedit.menu</MergeFile>
 </Menu>
