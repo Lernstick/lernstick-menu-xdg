@@ -1,3 +1,10 @@
+lernstick-menu-xdg (41) lernstick-13; urgency=medium
+
+  * [3a7a03] updated Plasma menu for Debian 13
+  * [41bd6e] updated Xfce application menu for Debian 13
+
+ -- Ronny Standtke <ronny.standtke@gmx.net>  Sat, 09 May 2026 19:28:25 +0200
+
 lernstick-menu-xdg (40) lernstick-13; urgency=medium
 
   * updated xfce menu for Debian 13
