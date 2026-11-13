@@ -16,6 +16,8 @@ gdbus_call_brightness()
 		>/dev/null 2>&1
 }
 
+count=1
+
 while true
 do
 	if gdbus_call_brightness
@@ -24,6 +26,8 @@ do
 		exit 0
 	else
 		echo "failed, trying again..."
-		sleep 1
+		sleep 3
+		count=$((count+1))
+		test $count -gt 10 && exit 1
 	fi
 done
